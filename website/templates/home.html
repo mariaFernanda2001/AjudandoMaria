@@ -7,8 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Home</h1>
-    <h3>{{ nome }}</h3>
+    <h1>Home - {{ nome }}</h1>
+    <p>Seus desafios criados:</p>
     {% for desafio in desafios %}
         <h4>{{ desafio.titulo }}</h4>
         <p>{{ desafio.valor }}</p>
