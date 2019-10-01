@@ -56,12 +56,14 @@ def login(request):
 
 def home(request, id, nome):
     usuario = Usuario.objects.filter(id=id, nome=nome).first()
-    desafios = Desafio.objects.filter(autor=usuario.id)
+    desafios = Desafio.objects.filter(autor=usuario.id, ativo=True)
+    desafios_gerais = Desafio.objects.exclude(autor=usuario.id)
 
     if desafios.first() is None:
         context = {
             'nome':usuario.nome,
-            'msg':'Você não criou nenhum desafio ainda, tente criar algum!!!!'
+            'msg':'Você não criou nenhum desafio ainda, tente criar algum!!!!',
+            'gerais':desafios_gerais
         }
 
         return render(request, 'home.html', context)
@@ -69,7 +71,8 @@ def home(request, id, nome):
     else:
         context = {
             'nome':usuario.nome,
-            'desafios':desafios
+            'desafios':desafios,
+            'gerais':desafios_gerais
         }
         return render(request, 'home.html', context)
 
