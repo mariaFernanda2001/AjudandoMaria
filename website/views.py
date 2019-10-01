@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from website.forms import UsuarioForm
+from django.shortcuts import render, redirect
+from website.forms import *
 from website.models import *
 
 def cadastrar(request):
@@ -16,3 +16,24 @@ def cadastrar(request):
             return render(request, 'cadastro.html', {'msg':'Salvo!!!'})
     
     return render(request, 'cadastro.html', {'cadastro':form})
+
+def login(request):
+    
+    form = LoginForm()
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        senha = request.POST.get('senha')
+        usuario = Usuario.objects.filter(email=email, senha=senha).first()
+
+        if usuario is not None:
+            identificacao = usuario.id
+
+            return redirect('home/' + str(identificacao))
+
+
+    return render(request, 'index.html', {'login':form})
+
+def home(request, id):
+
+    return render(request, 'home.html')
