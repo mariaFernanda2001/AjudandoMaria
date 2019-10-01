@@ -58,11 +58,20 @@ def home(request, id, nome):
     usuario = Usuario.objects.filter(id=id, nome=nome).first()
     desafios = Desafio.objects.filter(autor=usuario.id)
 
-    context = {
-        'nome':usuario.nome,
-        'desafios':desafios
-    }
-    return render(request, 'home.html', context)
+    if desafios.first() is None:
+        context = {
+            'nome':usuario.nome,
+            'msg':'Você não criou nenhum desafio ainda, tente criar algum!!!!'
+        }
+
+        return render(request, 'home.html', context)
+
+    else:
+        context = {
+            'nome':usuario.nome,
+            'desafios':desafios
+        }
+        return render(request, 'home.html', context)
 
 def desafiar(request, id, nome):
 
