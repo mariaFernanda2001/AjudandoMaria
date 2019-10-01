@@ -10,14 +10,16 @@
     <h1>Home - {{ nome }}</h1>
     <p>Seus desafios criados:</p>
     <h4>{{ msg }}</h4>
-    {% for desafio in desafios %}
-        <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
-            <h4>- {{ desafio.titulo }}</h4>
-            <p>Tema: {{ desafio.tema }}</p>
-            <p>{{ desafio.valor }}</p>
-            <p style="font-size:7pt;">{{ desafio.criacao }}</p>
-        </div>
-    {% endfor %}
+    <div style="display: flex; justify-content: center;">
+        {% for desafio in desafios %}
+            <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
+                <h4>- {{ desafio.titulo }}</h4>
+                <p>Tema: {{ desafio.tema }}</p>
+                <p>{{ desafio.valor }}</p>
+                <p style="font-size:7pt;">{{ desafio.criacao }}</p>
+            </div>
+        {% endfor %}
+    </div>
     <a href="desafiar/">+ Criar desafio</a>
 </body>
 </html>
