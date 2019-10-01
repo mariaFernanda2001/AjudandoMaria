@@ -32,6 +32,9 @@ def login(request):
 
             return redirect('home/{}/{}'.format(identificacao,nome))
 
+        else:
+
+            return render(request, 'index.html', {'msg':'Email ou senha inválidos', 'login':form})
 
     return render(request, 'index.html', {'login':form})
 
