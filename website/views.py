@@ -27,13 +27,14 @@ def login(request):
         usuario = Usuario.objects.filter(email=email, senha=senha).first()
 
         if usuario is not None:
-            identificacao = usuario.id
+            identificacao = str(usuario.id)
+            nome = str(usuario.nome)
 
-            return redirect('home/' + str(identificacao))
+            return redirect('home/{}/{}'.format(identificacao,nome))
 
 
     return render(request, 'index.html', {'login':form})
 
-def home(request, id):
+def home(request, id, nome):
 
     return render(request, 'home.html')
