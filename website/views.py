@@ -16,7 +16,7 @@ def cadastrar(request):
                 usuario = form_de_cadastro.save()
                 usuario.save()
 
-                return redirect('/')
+                return redirect('/home/{}/{}'.format(usuario.id, usuario.nome))
         else:
             
             if Usuario.objects.filter(nome=nome).first() is not None:
