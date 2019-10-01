@@ -55,5 +55,11 @@ def login(request):
     return render(request, 'index.html', {'login':form})
 
 def home(request, id, nome):
+    usuario = Usuario.objects.filter(id=id, nome=nome).first()
+    desafios = Desafio.objects.filter(autor=usuario.id)
 
-    return render(request, 'home.html')
+    context = {
+        'nome':usuario.nome,
+        'desafios':desafios
+    }
+    return render(request, 'home.html', context)
