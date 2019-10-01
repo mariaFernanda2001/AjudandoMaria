@@ -26,10 +26,13 @@
     <div style="display: flex; justify-content: center;">
         {% for desafio in gerais %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
+                <h3>
+                    <a href="">{{ desafio.autor.nome }}</a> te desafia!!
+                </h3>
                 <h4>- {{ desafio.titulo }}</h4>
                 <p>Tema: {{ desafio.tema }}</p>
                 <p>{{ desafio.valor }}</p>
-                <p style="font-size:7pt;">{{ desafio.criacao }} - {{ desafio.autor.nome }}</p>
+                <p style="font-size:7pt;">{{ desafio.criacao }}</p>
             </div>
         {% endfor %}
     </div>
