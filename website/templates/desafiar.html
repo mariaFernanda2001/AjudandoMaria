@@ -7,12 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Home</h1>
-    <h3>{{ nome }}</h3>
-    {% for desafio in desafios %}
-        <h4>{{ desafio.titulo }}</h4>
-        <p>{{ desafio.valor }}</p>
-    {% endfor %}
-    <a href="desafiar/">+ Criar desafio</a>
+    <h1>Crie seu desafio</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ desafio }}
+        <input type="submit" value="Criar">
+    </form>
 </body>
 </html>

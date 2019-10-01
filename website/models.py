@@ -11,7 +11,7 @@ class Usuario(models.Model):
 
 class Desafio(models.Model):
 
-    autor = models.OneToOneField(Usuario, on_delete=models.CASCADE, null=False)
+    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=False)
     titulo = models.CharField(max_length=30, null=False)
     tema = models.CharField(max_length=15, null=False)
     valor = models.TextField(max_length=240, null=False)
@@ -21,10 +21,10 @@ class Desafio(models.Model):
 
 class Resposta(models.Model):
 
-    autor = models.OneToOneField(Usuario, on_delete=models.CASCADE, null=False)
+    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=False)
     valor = models.TextField(max_length=240, null=False)
     likes = models.PositiveIntegerField(default=0)
-    desafio = models.ForeignKey(Desafio, on_delete=models.CASCADE)
+    desafio = models.OneToOneField(Desafio, on_delete=models.CASCADE)
     ativo = models.BooleanField(default=True)
     criacao = models.DateTimeField(auto_now_add=True)
 

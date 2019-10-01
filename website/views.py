@@ -63,3 +63,20 @@ def home(request, id, nome):
         'desafios':desafios
     }
     return render(request, 'home.html', context)
+
+def desafiar(request, id, nome):
+
+    form = DesafioForm()
+
+    if request.method == 'POST':
+        titulo = request.POST.get('titulo')
+        tema = request.POST.get('tema')
+        valor = request.POST.get('valor')
+        autor = Usuario.objects.filter(id=id, nome=nome).first()
+
+        desafio = Desafio(autor=autor, titulo=titulo, tema=tema, valor=valor)
+        desafio.save()
+
+        return redirect('/home/{}/{}'.format(id,nome))
+
+    return render(request, 'desafiar.html', {'desafio':form})

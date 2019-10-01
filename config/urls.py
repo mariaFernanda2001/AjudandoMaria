@@ -19,7 +19,8 @@ from website import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cadastro', views.cadastrar),
+    path('cadastro/', views.cadastrar),
     path('', views.login),
-    path('home/<int:id>/<str:nome>', views.home)
+    path('home/<int:id>/<str:nome>/', views.home),
+    path('home/<int:id>/<str:nome>/desafiar/', views.desafiar)
 ]

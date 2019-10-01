@@ -1,5 +1,5 @@
 from django import forms
-from website.models import Usuario
+from website.models import *
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
@@ -10,3 +10,8 @@ class  LoginForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ('email', 'senha')
+
+class DesafioForm(forms.ModelForm):
+    class Meta:
+        model = Desafio
+        fields = ('titulo', 'tema', 'valor')
