@@ -3,17 +3,33 @@ from website.forms import *
 from website.models import *
 
 def cadastrar(request):
-    #usuario = Usuario()
     form = UsuarioForm()
 
     if request.method == 'POST':
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        telefone = request.POST.get('telefone')
         form_de_cadastro = UsuarioForm(request.POST)
 
         if form_de_cadastro.is_valid():
-            usuario = form_de_cadastro.save()
-            usuario.save()
 
-            return render(request, 'cadastro.html', {'msg':'Salvo!!!'})
+                usuario = form_de_cadastro.save()
+                usuario.save()
+
+                return redirect('/')
+        else:
+            
+            if Usuario.objects.filter(nome=nome).first() is not None:
+
+                return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Nome já está sendo usado, tente outro..'})
+
+            elif Usuario.objects.filter(email=email).first() is not None:
+
+                return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Email já cadastrado'})
+
+            elif Usuario.objects.filter(telefone=telefone).first() is not None:
+
+                return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Telefone já cadastrado'})
     
     return render(request, 'cadastro.html', {'cadastro':form})
 
@@ -34,7 +50,7 @@ def login(request):
 
         else:
 
-            return render(request, 'index.html', {'msg':'Email ou senha inválidos', 'login':form})
+            return render(request, 'index.html', {'msg':'*Email ou senha inválidos', 'login':form})
 
     return render(request, 'index.html', {'login':form})
 

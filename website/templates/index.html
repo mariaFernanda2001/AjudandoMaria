@@ -7,11 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    {{ msg }}
+    <p style="color: red">
+        {{ msg }}
+    </p>
     <form action="" method="post">
         {% csrf_token %}
         {{ login }}
         <input type="submit" value="Logar">
     </form>
+    <a href="/cadastro">Cadastre-se</a>
 </body>
 </html>
