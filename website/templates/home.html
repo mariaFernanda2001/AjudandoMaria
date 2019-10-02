@@ -9,6 +9,7 @@
 <body>
     <img src="/media/{{ avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
     <h1>Home - {{ nome }}</h1>
+    <a href="desafiar/">+ Criar desafio</a>
     <p>Seus desafios criados:</p>
     <h4>{{ msg }}</h4>
     <div style="display: flex; justify-content: center;">
@@ -21,15 +22,17 @@
             </div>
         {% endfor %}
     </div>
+    <p>Desafios respondidos:</p>
     <div style="display: flex; justify-content: center;">
             {% for resposta in respostas %}
-                <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
-                    <h4>- {{ resposta.desafio.titulo }}</h4>
-                    <p style="font-size:7pt;">{{ desafio.criacao }}</p>
+                <div style="border: solid 1px black; margin: 10px; width: 200px; padding: 5px;">
+                    <a href="/desafio/{{ resposta.desafio.id}}/{{ resposta.desafio.titulo }}" target="_blank" rel="noopener noreferrer">
+                        <h4>- {{ resposta.desafio.titulo }}</h4>
+                    </a>
+                    <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
                 </div>
             {% endfor %}
         </div>
-    <a href="desafiar/">+ Criar desafio</a>
     <h2>Veja os desafios de geral!!!</h2>
     <p>Desafios da comunidade:</p>
     <div style="display: flex; justify-content: center;">
@@ -38,7 +41,9 @@
                 <h3>
                     <a href="">{{ desafio.autor.nome }}</a> te desafia!!
                 </h3>
-                <h4>- {{ desafio.titulo }}</h4>
+                <a href="/desafio/{{ desafio.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">
+                    <h4>- {{ desafio.titulo }}</h4>
+                </a>
                 <p>Tema: {{ desafio.tema }}</p>
                 <p>{{ desafio.valor }}</p>
                 <p style="font-size:7pt;">{{ desafio.criacao }}</p>

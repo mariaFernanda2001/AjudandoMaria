@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{ desafio.titulo }}</h1>
+    <h2>Tema: {{ desafio.tema }}</h2>
+    <p>{{ desafio.valor }}</p>
+    <p>Autor: {{ desafio.autor.nome }}</p>
+    <p>{{ desafio.criacao }}</p>
+    <div style="display: flex; justify-content: center;">
+        {% for resposta in respostas %}
+            <div style="border: solid 1px black; margin: 10px; padding: 15px; width:100%;">
+                <p>Resposta: {{ resposta.valor }}</p>
+                <p>Autor: {{ resposta.autor.nome }}</p>
+                <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

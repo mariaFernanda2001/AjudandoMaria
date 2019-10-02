@@ -111,3 +111,15 @@ def responder(request, id, nome, id_desafio):
         return redirect('/home/{}/{}'.format(id, nome))
 
     return render(request, 'responder.html', {'resposta':form})
+
+def desafio(request, id, titulo):
+    desafio = Desafio.objects.filter(id=id, titulo=titulo).first()
+    respostas = Resposta.objects.filter(desafio__id=id, desafio__titulo=titulo)
+
+    context = {
+
+        'desafio':desafio,
+        'respostas':respostas
+    }
+
+    return render(request, 'desafio.html', context)
