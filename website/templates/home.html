@@ -15,7 +15,9 @@
     <div>
         {% for desafio in desafios %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
-                <h4>- {{ desafio.titulo }}</h4>
+                <a href="/desafio/{{ desafio.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">            
+                    <h4>- {{ desafio.titulo }}</h4>
+                </a>
                 <p>Tema: {{ desafio.tema }}</p>
                 <p>{{ desafio.valor }}</p>
                 <p style="font-size:7pt;">{{ desafio.criacao }}</p>
@@ -39,7 +41,7 @@
         {% for desafio in gerais %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
                 <h3>
-                    <a href="/usuario/{{ desafio.autor.nome }}">{{ desafio.autor.nome }}</a> te desafia!!
+                    <a href="/usuario/{{ desafio.autor.nome }}" target="_blank" rel="noopener noreferrer">{{ desafio.autor.nome }}</a> te desafia!!
                 </h3>
                 <a href="/desafio/{{ desafio.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">
                     <h4>- {{ desafio.titulo }}</h4>
