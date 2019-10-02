@@ -12,7 +12,7 @@
     <a href="desafiar/">+ Criar desafio</a>
     <p>Seus desafios criados:</p>
     <h4>{{ msg }}</h4>
-    <div style="display: flex; justify-content: center;">
+    <div>
         {% for desafio in desafios %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
                 <h4>- {{ desafio.titulo }}</h4>
@@ -23,7 +23,7 @@
         {% endfor %}
     </div>
     <p>Desafios respondidos:</p>
-    <div style="display: flex; justify-content: center;">
+    <div>
             {% for resposta in respostas %}
                 <div style="border: solid 1px black; margin: 10px; width: 200px; padding: 5px;">
                     <a href="/desafio/{{ resposta.desafio.id}}/{{ resposta.desafio.titulo }}" target="_blank" rel="noopener noreferrer">
@@ -39,7 +39,7 @@
         {% for desafio in gerais %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
                 <h3>
-                    <a href="">{{ desafio.autor.nome }}</a> te desafia!!
+                    <a href="/usuario/{{ desafio.autor.nome }}">{{ desafio.autor.nome }}</a> te desafia!!
                 </h3>
                 <a href="/desafio/{{ desafio.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">
                     <h4>- {{ desafio.titulo }}</h4>

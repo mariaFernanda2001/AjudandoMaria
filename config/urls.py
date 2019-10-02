@@ -27,5 +27,6 @@ urlpatterns = [
     path('home/<int:id>/<str:nome>/', views.home),
     path('home/<int:id>/<str:nome>/desafiar/', views.desafiar),
     path('home/<int:id>/<str:nome>/responder/<int:id_desafio>/', views.responder),
-    path('desafio/<int:id>/<str:titulo>/', views.desafio)
+    path('desafio/<int:id>/<str:titulo>/', views.desafio),
+    path('usuario/<str:nome>', views.usuario)
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

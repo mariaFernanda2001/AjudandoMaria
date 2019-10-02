@@ -123,3 +123,8 @@ def desafio(request, id, titulo):
     }
 
     return render(request, 'desafio.html', context)
+
+def usuario(request, nome):
+    usuario = Usuario.objects.filter(nome=nome).first()
+
+    return render(request, 'usuario.html', {'usuario':usuario})

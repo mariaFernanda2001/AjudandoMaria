@@ -25,7 +25,7 @@ class Resposta(models.Model):
     autor = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=False)
     valor = models.TextField(max_length=240, null=False)
     likes = models.PositiveIntegerField(default=0)
-    desafio = models.OneToOneField(Desafio, on_delete=models.CASCADE)
+    desafio = models.ForeignKey(Desafio, on_delete=models.CASCADE)
     ativo = models.BooleanField(default=True)
     criacao = models.DateTimeField(auto_now_add=True)
 
