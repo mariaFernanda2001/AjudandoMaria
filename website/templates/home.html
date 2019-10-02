@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <img src="/media/{{ avatar }}" alt="">
+    <img src="/media/{{ avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
     <h1>Home - {{ nome }}</h1>
     <p>Seus desafios criados:</p>
     <h4>{{ msg }}</h4>
@@ -21,6 +21,14 @@
             </div>
         {% endfor %}
     </div>
+    <div style="display: flex; justify-content: center;">
+            {% for resposta in respostas %}
+                <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
+                    <h4>- {{ resposta.desafio.titulo }}</h4>
+                    <p style="font-size:7pt;">{{ desafio.criacao }}</p>
+                </div>
+            {% endfor %}
+        </div>
     <a href="desafiar/">+ Criar desafio</a>
     <h2>Veja os desafios de geral!!!</h2>
     <p>Desafios da comunidade:</p>
@@ -34,6 +42,7 @@
                 <p>Tema: {{ desafio.tema }}</p>
                 <p>{{ desafio.valor }}</p>
                 <p style="font-size:7pt;">{{ desafio.criacao }}</p>
+                <a href="responder/{{ desafio.id }}">Responder</a>
             </div>
         {% endfor %}
     </div>

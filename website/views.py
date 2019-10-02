@@ -57,6 +57,7 @@ def home(request, id, nome):
     usuario = Usuario.objects.filter(id=id, nome=nome).first()
     desafios = Desafio.objects.filter(autor=usuario.id, ativo=True)
     desafios_gerais = Desafio.objects.exclude(autor=usuario.id)
+    respostas = Resposta.objects.filter(autor=usuario.id, ativo=True)
 
     if desafios.first() is None:
         context = {
@@ -73,8 +74,10 @@ def home(request, id, nome):
             'nome':usuario.nome,
             'avatar':usuario.avatar,
             'desafios':desafios,
+            'respostas':respostas,
             'gerais':desafios_gerais
         }
+
         return render(request, 'home.html', context)
 
 def desafiar(request, id, nome):
@@ -93,3 +96,18 @@ def desafiar(request, id, nome):
         return redirect('/home/{}/{}'.format(id,nome))
 
     return render(request, 'desafiar.html', {'desafio':form})
+
+def responder(request, id, nome, id_desafio):
+
+    form = RespostaForm()
+    
+    if request.method == 'POST':
+        valor = request.POST.get('valor')
+        autor = Usuario.objects.filter(id=id, nome=nome).first()
+        desafio = Desafio.objects.filter(id=id_desafio).first()
+        resposta = Resposta(valor=valor, autor=autor, desafio=desafio)
+        resposta.save()
+
+        return redirect('/home/{}/{}'.format(id, nome))
+
+    return render(request, 'responder.html', {'resposta':form})

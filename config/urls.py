@@ -25,5 +25,6 @@ urlpatterns = [
     path('cadastro/', views.cadastrar),
     path('', views.login),
     path('home/<int:id>/<str:nome>/', views.home),
-    path('home/<int:id>/<str:nome>/desafiar/', views.desafiar)
+    path('home/<int:id>/<str:nome>/desafiar/', views.desafiar),
+    path('home/<int:id>/<str:nome>/responder/<int:id_desafio>/', views.responder)
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

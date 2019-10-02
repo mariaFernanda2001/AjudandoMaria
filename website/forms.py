@@ -16,3 +16,8 @@ class DesafioForm(forms.ModelForm):
     class Meta:
         model = Desafio
         fields = ('titulo', 'tema', 'valor')
+
+class RespostaForm(forms.ModelForm):
+    class Meta:
+        model = Resposta
+        fields = ('valor',)
