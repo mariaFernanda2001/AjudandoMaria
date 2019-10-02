@@ -3,34 +3,33 @@ from website.forms import *
 from website.models import *
 
 def cadastrar(request):
+
     form = UsuarioForm()
 
     if request.method == 'POST':
         nome = request.POST.get('nome')
         email = request.POST.get('email')
+        senha = request.POST.get('senha')
         telefone = request.POST.get('telefone')
-        form_de_cadastro = UsuarioForm(request.POST)
 
-        if form_de_cadastro.is_valid():
+        if Usuario.objects.filter(nome=nome).first() is not None:
 
-                usuario = form_de_cadastro.save()
-                usuario.save()
+            return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Nome já está sendo usado, tente outro..'})
 
-                return redirect('/home/{}/{}'.format(usuario.id, usuario.nome))
+        elif Usuario.objects.filter(email=email).first() is not None:
+
+            return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Email já cadastrado'})
+
+        elif Usuario.objects.filter(telefone=telefone).first() is not None:
+
+            return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Telefone já cadastrado'})
+        
         else:
+            usuario = Usuario(nome=nome, email=email, telefone=telefone, senha=senha)
+            usuario.save()
             
-            if Usuario.objects.filter(nome=nome).first() is not None:
+            return redirect('/home/{}/{}'.format(usuario.id, usuario.nome))
 
-                return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Nome já está sendo usado, tente outro..'})
-
-            elif Usuario.objects.filter(email=email).first() is not None:
-
-                return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Email já cadastrado'})
-
-            elif Usuario.objects.filter(telefone=telefone).first() is not None:
-
-                return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Telefone já cadastrado'})
-    
     return render(request, 'cadastro.html', {'cadastro':form})
 
 def login(request):
@@ -62,6 +61,7 @@ def home(request, id, nome):
     if desafios.first() is None:
         context = {
             'nome':usuario.nome,
+            'avatar':usuario.avatar,
             'msg':'Você não criou nenhum desafio ainda, tente criar algum!!!!',
             'gerais':desafios_gerais
         }
@@ -71,6 +71,7 @@ def home(request, id, nome):
     else:
         context = {
             'nome':usuario.nome,
+            'avatar':usuario.avatar,
             'desafios':desafios,
             'gerais':desafios_gerais
         }

@@ -2,6 +2,7 @@ from django.db import models
 
 class Usuario(models.Model):
     
+    avatar = models.FileField(upload_to='avatar/')
     nome = models.CharField(max_length=15, unique=True, null=False)
     email = models.EmailField(unique=True, null=False)
     senha = models.CharField(max_length=15, null=False)

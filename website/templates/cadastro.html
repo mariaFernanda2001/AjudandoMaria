@@ -10,7 +10,7 @@
     {{ msg }}
     <form action="" method="post">
         {% csrf_token %}
-        {{ cadastro.as_p }}
+        {{ cadastro }}
         <input type="submit" value="Cadastrar e logar">
     </form>
 </body>
