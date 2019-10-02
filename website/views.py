@@ -126,5 +126,14 @@ def desafio(request, id, titulo):
 
 def usuario(request, nome):
     usuario = Usuario.objects.filter(nome=nome).first()
+    respostas = Resposta.objects.filter(autor__nome=nome)
+    desafios = Desafio.objects.filter(autor__nome=nome)
 
-    return render(request, 'usuario.html', {'usuario':usuario})
+    context = {
+
+        'usuario':usuario,
+        'respostas':respostas,
+        'desafios':desafios
+    }
+
+    return render(request, 'usuario.html', context)
