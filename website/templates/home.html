@@ -7,15 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <img src="/media/{{ avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
-    <h1>Home - {{ nome }}</h1>
+    <img src="/media/{{ perfil.avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
+    <h1>Home - {{ perfil.user }}</h1>
     <a href="desafiar/">+ Criar desafio</a>
     <p>Seus desafios criados:</p>
     <h4>{{ msg }}</h4>
     <div>
         {% for desafio in desafios %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
-                <a href="/desafio/{{ desafio.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">            
+                <a href="/desafio/{{ desafio.id }}/{{ perfil.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">            
                     <h4>- {{ desafio.titulo }}</h4>
                 </a>
                 <p>Tema: {{ desafio.tema }}</p>
@@ -26,24 +26,25 @@
     </div>
     <p>Desafios respondidos:</p>
     <div>
-            {% for resposta in respostas %}
-                <div style="border: solid 1px black; margin: 10px; width: 200px; padding: 5px;">
-                    <a href="/desafio/{{ resposta.desafio.id}}/{{ resposta.desafio.titulo }}" target="_blank" rel="noopener noreferrer">
-                        <h4>- {{ resposta.desafio.titulo }}</h4>
-                    </a>
-                    <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
-                </div>
-            {% endfor %}
-        </div>
+        {% for resposta in respostas %}
+            <div style="border: solid 1px black; margin: 10px; width: 200px; padding: 5px;">
+                <a href="/desafio/{{ resposta.desafio.id}}/{{ perfil.id }}/{{ resposta.desafio.titulo }}" target="_blank" rel="noopener noreferrer">
+                    <h4>- {{ resposta.desafio.titulo }}</h4>
+                </a>
+                <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
+                <p style="font-size: 8pt;">{{ resposta.likes.perfil.user}} e mais {{ resposta.total }} pessoas deram like..</p>
+            </div>
+        {% endfor %}
+    </div>
     <h2>Veja os desafios de geral!!!</h2>
     <p>Desafios da comunidade:</p>
     <div style="display: flex; justify-content: center;">
         {% for desafio in gerais %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
                 <h3>
-                    <a href="/usuario/{{ desafio.autor.nome }}" target="_blank" rel="noopener noreferrer">{{ desafio.autor.nome }}</a> te desafia!!
+                    <a href="{{ desafio.autor.user }}" target="_blank" rel="noopener noreferrer">{{ desafio.autor.user }}</a> te desafia!!
                 </h3>
-                <a href="/desafio/{{ desafio.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">
+                <a href="/desafio/{{ desafio.id }}/{{ perfil.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">
                     <h4>- {{ desafio.titulo }}</h4>
                 </a>
                 <p>Tema: {{ desafio.tema }}</p>

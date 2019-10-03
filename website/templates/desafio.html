@@ -10,13 +10,15 @@
     <h1>{{ desafio.titulo }}</h1>
     <h2>Tema: {{ desafio.tema }}</h2>
     <p>{{ desafio.valor }}</p>
-    <p>Autor: {{ desafio.autor.nome }}</p>
+    <p>Autor: {{ desafio.autor.user }}</p>
     <p>{{ desafio.criacao }}</p>
+    <a href="/like/{{ desafio.id }}/{{ desafio.titulo }}/{{ user }}/d" style="font-size: 10pt;">likes - {{ desafio.likes.perfil.user }} e mais {{desafio.total}} pessoas..</a>
     <div style="display: flex; justify-content: center;">
         {% for resposta in respostas %}
             <div style="border: solid 1px black; margin: 10px; padding: 15px; width:100%;">
                 <p>Resposta: {{ resposta.valor }}</p>
-                <p>Autor: {{ resposta.autor.nome }}</p>
+                <p>Autor: {{ resposta.autor.user }}</p>
+                <a href="/like/{{ resposta.id }}/{{ desafio.titulo }}/{{ user }}/r" style="font-size: 10pt;">likes - {{ resposta.likes.perfil.user }} e mais {{ resposta.total }} pessoas..</a>
                 <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
             </div>
         {% endfor %}

@@ -1,15 +1,14 @@
 from django import forms
 from website.models import *
-from django.forms.widgets import ClearableFileInput
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
-        model = Usuario
-        fields = ('nome','email','senha','telefone')
+        model = Perfil
+        fields = ('user', 'nome', 'sobrenome', 'mensagem', 'email','senha','telefone')
 
 class  LoginForm(forms.ModelForm):
     class Meta:
-        model = Usuario
+        model = Perfil
         fields = ('email', 'senha')
 
 class DesafioForm(forms.ModelForm):
