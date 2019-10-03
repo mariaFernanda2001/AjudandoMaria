@@ -42,7 +42,7 @@
         {% for desafio in gerais %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
                 <h3>
-                    <a href="{{ desafio.autor.user }}" target="_blank" rel="noopener noreferrer">{{ desafio.autor.user }}</a> te desafia!!
+                    <a href="/{{ desafio.autor.user }}" target="_blank" rel="noopener noreferrer">{{ desafio.autor.user }}</a> te desafia!!
                 </h3>
                 <a href="/desafio/{{ desafio.id }}/{{ perfil.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">
                     <h4>- {{ desafio.titulo }}</h4>
