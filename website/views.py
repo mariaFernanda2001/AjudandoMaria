@@ -31,7 +31,7 @@ def cadastrar(request):
             perfil = Perfil(user=user, sobrenome=sobrenome, mensagem=mensagem, nome=nome, email=email, telefone=telefone, senha=senha)
             perfil.save()
             
-            return redirect('/home/{}/{}'.format(perfil.id, perfil.user))
+            return redirect('/home/{}{}/{}'.format(perfil.criacao, perfil.id, perfil.user))
 
     return render(request, 'cadastro.html', {'cadastro':form})
 
@@ -46,7 +46,7 @@ def login(request):
 
         if perfil is not None:
 
-            return redirect('home/{}/{}'.format(perfil.id, perfil.user))
+            return redirect('home/{}{}/{}'.format(perfil.criacao, perfil.id, perfil.user))
 
         else:
 
@@ -54,7 +54,7 @@ def login(request):
 
     return render(request, 'index.html', {'login':form})
 
-def home(request, id, user):
+def home(request, criacao, id, user):
     perfil = Perfil.objects.filter(id=id, user=user).first()
     desafios = Desafio.objects.filter(autor=perfil.id, ativo=True)
     desafios_gerais = Desafio.objects.exclude(autor=perfil.id)
@@ -80,7 +80,7 @@ def home(request, id, user):
 
         return render(request, 'home.html', context)
 
-def desafiar(request, id, user):
+def desafiar(request, criacao, id, user):
 
     form = DesafioForm()
 
@@ -93,28 +93,28 @@ def desafiar(request, id, user):
         desafio = Desafio(autor=autor, titulo=titulo, tema=tema, valor=valor)
         desafio.save()
 
-        return redirect('/home/{}/{}'.format(id, user))
+        return redirect('/home/{}{}/{}'.format(criacao, id, user))
 
     return render(request, 'desafiar.html', {'desafio':form})
 
-def responder(request, id, user, id_desafio):
+def responder(request, criacao, id, user, id_desafio):
 
     form = RespostaForm()
     
     if request.method == 'POST':
         valor = request.POST.get('valor')
         autor = Perfil.objects.filter(id=id, user=user).first()
-        desafio = Desafio.objects.filter(id=id_desafio).first()
+        desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first()
         resposta = Resposta(valor=valor, autor=autor, desafio=desafio)
         resposta.save()
 
-        return redirect('/home/{}/{}'.format(id, user))
+        return redirect('/home/{}{}/{}'.format(criacao, id, user))
 
     return render(request, 'responder.html', {'resposta':form})
 
 def desafio(request, id, user, titulo):
-    desafio = Desafio.objects.filter(id=id, titulo=titulo).first()
-    respostas = Resposta.objects.filter(desafio__id=id, desafio__titulo=titulo)
+    desafio = Desafio.objects.filter(id=id, titulo=titulo, ativo=True).first()
+    respostas = Resposta.objects.filter(desafio__id=id, desafio__titulo=titulo, ativo=True)
     perfil = user
     context = {
 
@@ -127,21 +127,24 @@ def desafio(request, id, user, titulo):
 
 def usuario(request, user):
     perfil = Perfil.objects.filter(user=user).first()
-    respostas = Resposta.objects.filter(autor__user=user)
-    desafios = Desafio.objects.filter(autor__user=user)
+    respostas = Resposta.objects.filter(autor__user=user, ativo=True)
+    desafios = Desafio.objects.filter(autor__user=user, ativo=True)
 
-    context = {
+    if perfil is not None:
+        context = {
 
-        'perfil':perfil,
-        'respostas':respostas,
-        'desafios':desafios
-    }
+            'perfil':perfil,
+            'respostas':respostas,
+            'desafios':desafios
+        }
 
-    return render(request, 'usuario.html', context)
+        return render(request, 'usuario.html', context)
+
+    return render(request, 'error.html', {'msg':'Oops.. Rota inválida'})
 
 def like_desafio(request, id, titulo, user):
-    desafio = Desafio.objects.filter(id=id, titulo=titulo).first()
-    like = Desafio.objects.filter(id=id, titulo=titulo, likes__perfil__id=user).first()
+    desafio = Desafio.objects.filter(id=id, titulo=titulo, ativo=True).first()
+    like = Desafio.objects.filter(id=id, titulo=titulo, likes__perfil__id=user, ativo=True).first()
 
     if like is None:
         perfil = Perfil.objects.filter(id=user).first()
@@ -157,7 +160,7 @@ def like_desafio(request, id, titulo, user):
     return render(request, 'error.html', {'msg':'Oops.. Essa ação é inválida :('})
 
 def like_resposta(request, id, titulo, user):
-    resposta = Resposta.objects.filter(id=id).first()
+    resposta = Resposta.objects.filter(id=id, ativo=True).first()
     like = Resposta.objects.filter(id=id, likes__perfil__id=user).first()
 
     if like is None:
@@ -169,5 +172,18 @@ def like_resposta(request, id, titulo, user):
         resposta.save()
 
         return redirect('/desafio/{}/{}/{}'.format(resposta.desafio.id, user, titulo))
+
+    return render(request, 'error.html', {'msg':'Oops.. Essa ação é inválida :('})
+
+def delete_desafio(request, criacao, id, user, id_desafio):
+
+    desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first()
+
+    if desafio is not None:
+
+        desafio.ativo = False
+        desafio.save()
+
+        return redirect('/home/{}{}/{}'.format(criacao, id, user))
 
     return render(request, 'error.html', {'msg':'Oops.. Essa ação é inválida :('})

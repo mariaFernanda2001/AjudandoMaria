@@ -21,6 +21,7 @@
                 <p>Tema: {{ desafio.tema }}</p>
                 <p>{{ desafio.valor }}</p>
                 <p style="font-size:7pt;">{{ desafio.criacao }}</p>
+                <a href="/delete/{{ perfil.criacao }}{{ perfil.id }}/{{ perfil.user }}/{{ desafio.id }}">Excluir</a>
             </div>
         {% endfor %}
     </div>
