@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
     <p style="color: red">
         {{ msg }}
     </p>
@@ -16,5 +11,4 @@
         <input type="submit" value="Logar">
     </form>
     <a href="/cadastro/">Cadastre-se</a>
-</body>
-</html>
+{% endblock %}
