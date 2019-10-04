@@ -18,6 +18,7 @@ class Perfil(models.Model):
 class Like(models.Model):
 
     perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
+    correspondente = models.CharField(max_length=20, null=False)
 
 class Desafio(models.Model):
 
@@ -26,8 +27,7 @@ class Desafio(models.Model):
     titulo = models.CharField(max_length=30, null=False)
     tema = models.CharField(max_length=15, null=False)
     valor = models.TextField(max_length=240, null=False)
-    likes = models.ForeignKey(Like, on_delete=models.CASCADE, null=True)
-    total = models.PositiveIntegerField(default=0)
+    likes = models.PositiveIntegerField(default=0)
     ativo = models.BooleanField(default=True)
     criacao = models.DateTimeField(auto_now_add=True)
 
@@ -36,8 +36,7 @@ class Resposta(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     autor = models.ForeignKey(Perfil, on_delete=models.CASCADE, null=False)
     valor = models.TextField(max_length=240, null=False)
-    likes = models.ForeignKey(Like, on_delete=models.CASCADE, null=True)
-    total = models.PositiveIntegerField(default=0)
+    likes = models.PositiveIntegerField(default=0)
     desafio = models.ForeignKey(Desafio, on_delete=models.CASCADE)
     ativo = models.BooleanField(default=True)
     criacao = models.DateTimeField(auto_now_add=True)

@@ -30,6 +30,6 @@ urlpatterns = [
     path('delete/<str:id>/<str:id_desafio>/', views.delete_desafio),
     path('desafio/<str:id>', views.desafio),
     path('<str:user>', views.usuario),
-    path('like/<str:id>/<str:id_desafio>/d', views.like_desafio),
-    path('like/<str:id>/<str:id_desafio>/r', views.like_resposta)
+    path('like/d/<str:id>/<str:id_desafio>', views.like_desafio),
+    path('like/r/<str:id>/<str:id_desafio>', views.like_resposta)
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

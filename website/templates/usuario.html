@@ -1,6 +1,25 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
-
+    <div style="margin: 40px;">
+        <h1>{{ perfil.user }}</h1>
+        <h3>{{ perfil.nome}} {{perfil.sobrenome}}</h3>
+        <p>{{ perfil.email }}</p>
+        <p>"{{ perfil.mensagem }}"</p>
+    
+        {% for desafio in desafios %}
+            <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
+    
+                <a href="/desafio/{{ desafio.id }}" target="_blank" rel="noopener noreferrer">
+                    <h4>- {{ desafio.titulo }}</h4>
+                </a>
+                <p>Tema: {{ desafio.tema }}</p>
+                <p>{{ desafio.valor }}</p>
+                <p style="font-size:7pt;">{{ desafio.criacao }}</p>
+                <a href="responder/{{ perfil.id }}/{{ desafio.id }}">Responder</a>
+                <a href="/like/d/{{ perfil.id }}/{{ desafio.id }}" style="font-size: 10pt;">Dar like - {{ desafio.likes }}</a>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

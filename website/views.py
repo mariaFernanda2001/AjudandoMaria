@@ -162,22 +162,19 @@ def usuario(request, user):
 
     return render(request, 'error.html', {'msg':'Oops.. Rota inválida'})
 
-def like_desafio(request, id, titulo, user):
-    desafio = Desafio.objects.filter(id=id, titulo=titulo, ativo=True).first()
-    filtro = Desafio.objects.filter(id=id, titulo=titulo, likes__perfil__id=user, ativo=True).first()
+def like_desafio(request, id, id_desafio):
+    
+    filtro = Like.objects.filter(correspondente=id_desafio, perfil__id=id).first()
 
     if filtro is None:
-        perfil = Perfil.objects.filter(id=user).first()
-        like = Like(perfil=perfil)
+        perfil = Perfil.objects.filter(id=id).first()
+        like = Like(correspondente=id_desafio, perfil=perfil)
         like.save()
-        desafio.likes = like
-        desafio.total += 1
+        desafio = Desafio.objects.filter(id=id_desafio).first()
+        desafio.likes += 1
         desafio.save()
 
-
-        return redirect('/desafio/{}'.format(id))
-
-    return render(request, 'error.html', {'msg':'Oops.. Essa ação é inválida :('})
+    return redirect('/home/{}'.format(id))
 
 def like_resposta(request, id, titulo, user):
     resposta = Resposta.objects.filter(id=id, ativo=True).first()
