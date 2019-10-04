@@ -58,7 +58,7 @@ def home(request, id):
     perfil = Perfil.objects.filter(id=id, ativo=True).first()
     desafios = Desafio.objects.filter(autor=perfil.id, ativo=True)
     desafios_gerais = Desafio.objects.exclude(autor=perfil.id).filter(ativo=True)
-    respostas = Resposta.objects.filter(autor=perfil.id, ativo=True)
+    respostas = Resposta.objects.filter(autor=perfil.id, ativo=True, desafio__ativo=True)
 
     if desafios.first() is None:
         context = {
