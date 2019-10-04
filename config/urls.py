@@ -32,4 +32,5 @@ urlpatterns = [
     path('<str:user>', views.usuario),
     path('like/d/<str:id>/<str:id_desafio>', views.like_desafio),
     path('like/r/<str:id>/<str:id_desafio>', views.like_resposta)
-] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+]
+# + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
