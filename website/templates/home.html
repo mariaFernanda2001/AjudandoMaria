@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <aside>
+        <ul>
+            <li><a href="desafiar/">Criar desafio</a></li>
+            <li><a href=""></a>Configurações</li>
+        </ul>
+    </aside>
     <img src="/media/{{ perfil.avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
     <h1>Home - {{ perfil.user }}</h1>
     <a href="desafiar/{{perfil.id}}">+ Criar desafio</a>
@@ -36,7 +37,7 @@
                 <p style="font-size: 8pt;">{{ resposta.likes.perfil.user}} e mais {{ resposta.total }} pessoas deram like..</p>
             </div>
         {% endfor %}
-    </div>
+    </div id= "responder">
     <h2>Veja os desafios de geral!!!</h2>
     <p>Desafios da comunidade:</p>
     <div style="display: flex; justify-content: center;">
@@ -55,5 +56,4 @@
             </div>
         {% endfor %}
     </div>
-</body>
-</html>
+    {% endblock %}

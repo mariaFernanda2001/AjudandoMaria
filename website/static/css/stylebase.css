@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+}
+
+footer{ 
+    align-items: center; 
+    background-color: #cbbcd2;
+    display: flex;
+    justify-content: space-between;  
+    }
+    
+.footer-escuro{
+    background-color: #baaac1;
+    height: 5px;
+}
+footer img{
+    margin-right: 5px;
+    margin-top: 3px;
+    width: 30px;
+  
+}
+
+footer p{
+    color: #979797;
+    font-family: 'Montserrat';
+margin-left: 5px;
+}
+footer p a{
+    
+    color: #979797;
+    text-decoration: none;
+}
+nav{ align-items: center;
+    background-color: #6f4584;
+    display: flex;
+    margin-bottom: 10px;
+}
+nav img{
+    margin-left: 2px;
+    width: 60px;
+    
+}
+nav p{
+    color: white;
+    font-family: 'Major Mono Display', monospace;
+    font-size: 35px;
+    margin-left: 43%;
+   
+  
+}
