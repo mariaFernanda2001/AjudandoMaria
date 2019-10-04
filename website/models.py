@@ -1,7 +1,9 @@
 from django.db import models
+import uuid
 
 class Perfil(models.Model):
     
+    id = models.UUIDField(primary_key= True,default=uuid.uuid4, editable=False)
     avatar = models.FileField(upload_to='avatar/')
     user = models.CharField(max_length=15, unique=True, null=False)
     email = models.EmailField(unique=True, null=False)
@@ -19,6 +21,7 @@ class Like(models.Model):
 
 class Desafio(models.Model):
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     autor = models.ForeignKey(Perfil, on_delete=models.CASCADE, null=False)
     titulo = models.CharField(max_length=30, null=False)
     tema = models.CharField(max_length=15, null=False)
@@ -30,6 +33,7 @@ class Desafio(models.Model):
 
 class Resposta(models.Model):
 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     autor = models.ForeignKey(Perfil, on_delete=models.CASCADE, null=False)
     valor = models.TextField(max_length=240, null=False)
     likes = models.ForeignKey(Like, on_delete=models.CASCADE, null=True)

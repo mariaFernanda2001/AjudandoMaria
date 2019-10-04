@@ -24,12 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastro/', views.cadastrar),
     path('', views.login),
-    path('home/<str:criacao><int:id>/<str:user>/', views.home),
-    path('home/<str:criacao><int:id>/<str:user>/desafiar/', views.desafiar),
-    path('home/<str:criacao><int:id>/<str:user>/responder/<int:id_desafio>/', views.responder),
-    path('delete/<str:criacao><int:id>/<str:user>/<int:id_desafio>/', views.delete_desafio),
-    path('desafio/<int:id>/<int:user>/<str:titulo>/', views.desafio),
+    path('home/<str:id>', views.home),
+    path('home/desafiar/<str:id>', views.desafiar),
+    path('home/responder/<str:id>/<str:id_desafio>/', views.responder),
+    path('delete/<str:id>/<str:id_desafio>/', views.delete_desafio),
+    path('desafio/<str:id>', views.desafio),
     path('<str:user>', views.usuario),
-    path('like/<int:id>/<str:titulo>/<int:user>/d', views.like_desafio),
-    path('like/<int:id>/<str:titulo>/<int:user>/r', views.like_resposta)
+    path('like/<str:id>/<str:id_desafio>/d', views.like_desafio),
+    path('like/<str:id>/<str:id_desafio>/r', views.like_resposta)
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

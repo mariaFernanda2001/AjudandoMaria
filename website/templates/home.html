@@ -9,19 +9,19 @@
 <body>
     <img src="/media/{{ perfil.avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
     <h1>Home - {{ perfil.user }}</h1>
-    <a href="desafiar/">+ Criar desafio</a>
+    <a href="desafiar/{{perfil.id}}">+ Criar desafio</a>
     <p>Seus desafios criados:</p>
     <h4>{{ msg }}</h4>
     <div>
         {% for desafio in desafios %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
-                <a href="/desafio/{{ desafio.id }}/{{ perfil.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">            
+                <a href="/desafio/{{ desafio.id }}" target="_blank" rel="noopener noreferrer">            
                     <h4>- {{ desafio.titulo }}</h4>
                 </a>
                 <p>Tema: {{ desafio.tema }}</p>
                 <p>{{ desafio.valor }}</p>
                 <p style="font-size:7pt;">{{ desafio.criacao }}</p>
-                <a href="/delete/{{ perfil.criacao }}{{ perfil.id }}/{{ perfil.user }}/{{ desafio.id }}">Excluir</a>
+                <a href="/delete/{{ perfil.id }}/{{ desafio.id }}">Excluir</a>
             </div>
         {% endfor %}
     </div>
@@ -29,7 +29,7 @@
     <div>
         {% for resposta in respostas %}
             <div style="border: solid 1px black; margin: 10px; width: 200px; padding: 5px;">
-                <a href="/desafio/{{ resposta.desafio.id}}/{{ perfil.id }}/{{ resposta.desafio.titulo }}" target="_blank" rel="noopener noreferrer">
+                <a href="/desafio/{{ resposta.desafio.id}}" target="_blank" rel="noopener noreferrer">
                     <h4>- {{ resposta.desafio.titulo }}</h4>
                 </a>
                 <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
@@ -45,13 +45,13 @@
                 <h3>
                     <a href="/{{ desafio.autor.user }}" target="_blank" rel="noopener noreferrer">{{ desafio.autor.user }}</a> te desafia!!
                 </h3>
-                <a href="/desafio/{{ desafio.id }}/{{ perfil.id }}/{{ desafio.titulo }}" target="_blank" rel="noopener noreferrer">
+                <a href="/desafio/{{ desafio.id }}" target="_blank" rel="noopener noreferrer">
                     <h4>- {{ desafio.titulo }}</h4>
                 </a>
                 <p>Tema: {{ desafio.tema }}</p>
                 <p>{{ desafio.valor }}</p>
                 <p style="font-size:7pt;">{{ desafio.criacao }}</p>
-                <a href="responder/{{ desafio.id }}">Responder</a>
+                <a href="responder/{{ perfil.id }}/{{ desafio.id }}">Responder</a>
             </div>
         {% endfor %}
     </div>
