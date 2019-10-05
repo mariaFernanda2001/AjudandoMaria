@@ -59,6 +59,20 @@ def home(request, id):
     desafios = Desafio.objects.filter(autor=perfil.id, ativo=True)
     desafios_gerais = Desafio.objects.exclude(autor=perfil.id).filter(ativo=True)
     respostas = Resposta.objects.filter(autor=perfil.id, ativo=True, desafio__ativo=True)
+    nomeados = []
+
+    for desafio in desafios:
+        if desafio.likes != 0:
+            like = Like.objects.filter(correspondente=desafio.id).first()
+            nomeados.append({
+                'desafio':desafio,
+                'like':like.perfil.user
+                })
+        else:
+            nomeados.append({ 
+                'desafio':desafio,
+                'like':'Sem likes!!'
+                })
 
     if desafios.first() is None:
         context = {
@@ -73,7 +87,7 @@ def home(request, id):
     else:
         context = {
             'perfil':perfil,
-            'desafios':desafios,
+            'nomeados':nomeados,
             'respostas':respostas,
             'gerais':desafios_gerais
         }

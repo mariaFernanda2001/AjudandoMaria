@@ -14,16 +14,23 @@
     <p>Seus desafios criados:</p>
     <h4>{{ msg }}</h4>
     <div>
-        {% for desafio in desafios %}
+        {% for nomeado in nomeados %}
             <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
                 <a href="/desafio/{{ desafio.id }}" target="_blank" rel="noopener noreferrer">            
-                    <h4>- {{ desafio.titulo }}</h4>
+                    <h4>- {{ nomeado.desafio.titulo }}</h4>
                 </a>
-                <p>Tema: {{ desafio.tema }}</p>
-                <p>{{ desafio.valor }}</p>
-                <p style="font-size:7pt;">{{ desafio.criacao }}</p>
-                <p>likes - {{ desafio.likes }}</p>
-                <a href="/delete/{{ perfil.id }}/{{ desafio.id }}">Excluir</a>
+                <p>Tema: {{ nomeado.desafio.tema }}</p>
+                <p>{{ nomeado.desafio.valor }}</p>
+                <p style="font-size:7pt;">{{ nomeado.desafio.criacao }}</p>
+                {% if nomeado.like != 'Sem likes!!' %}
+                    <p>likes - <a href="/{{ nomeado.like }}" target="_blank" rel="noopener noreferrer">
+                                    {{ nomeado.like }} 
+                                </a>
+                        e mais {{ nomeado.desafio.likes }} pessoas...</p>
+                {% else %}
+                    <p>{{ nomeado.like }}</p>
+                {% endif %}
+                    <a href="/delete/{{ perfil.id }}/{{ desafio.id }}">Excluir</a>
             </div>
         {% endfor %}
     </div>
