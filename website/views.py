@@ -60,8 +60,15 @@ def home(request, id):
     desafios_gerais = Desafio.objects.exclude(autor=perfil.id).filter(ativo=True)
     respostas = Resposta.objects.filter(autor=perfil.id, ativo=True, desafio__ativo=True)
     nomeados = []
+    gerais_filtrados = []
 
-    
+    for desafio in desafios_gerais:
+
+        if Resposta.objects.filter(desafio__id=desafio.id, autor=perfil).first() is None:
+            gerais_filtrados.append({
+                'desafio':desafio
+                })
+
     for desafio in desafios:
         if desafio.likes != 0:
             like = Like.objects.filter(correspondente=desafio.id).first()
@@ -80,7 +87,7 @@ def home(request, id):
             'perfil':perfil,
             'msg':'Você não criou nenhum desafio ainda, tente criar algum!!!!',
             'respostas':respostas,
-            'gerais':desafios_gerais
+            'gerais':gerais_filtrados
         }
 
         return render(request, 'home.html', context)
@@ -90,7 +97,7 @@ def home(request, id):
             'perfil':perfil,
             'nomeados':nomeados,
             'respostas':respostas,
-            'gerais':desafios_gerais
+            'gerais':gerais_filtrados
         }
 
         return render(request, 'home.html', context)
