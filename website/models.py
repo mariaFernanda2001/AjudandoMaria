@@ -18,7 +18,7 @@ class Perfil(models.Model):
 class Like(models.Model):
 
     perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
-    correspondente = models.CharField(max_length=20, null=False)
+    correspondente = models.CharField(max_length=50, null=False)
 
 class Desafio(models.Model):
 
