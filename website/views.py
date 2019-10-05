@@ -61,6 +61,7 @@ def home(request, id):
     respostas = Resposta.objects.filter(autor=perfil.id, ativo=True, desafio__ativo=True)
     nomeados = []
 
+    
     for desafio in desafios:
         if desafio.likes != 0:
             like = Like.objects.filter(correspondente=desafio.id).first()
