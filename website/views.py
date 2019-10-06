@@ -18,7 +18,7 @@ def cadastrar(request):
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')
 
-        #Verificação de usuário já existente
+        #Verificação de campos únicos já existentes
         if Perfil.objects.filter(user=user).exists():
 
             return render(request, 'cadastro.html', {'cadastro':form, 'msg':'*Nome já está sendo usado, tente outro..'})
@@ -51,7 +51,7 @@ def login(request):
         #Pegar valores do formulário
         email = request.POST.get('email')
         senha = request.POST.get('senha')
-        perfil = Perfil.objects.filter(email=email, senha=senha, ativo=True).first()
+        perfil = Perfil.objects.filter(email=email, senha=senha, ativo=True).first() #Filtro para buscar usuário no banco
 
         #Verificação do cadastro no banco
         if perfil is not None:
@@ -65,27 +65,34 @@ def login(request):
     return render(request, 'index.html', {'login':form})
 
 def home(request, id):
-    perfil = Perfil.objects.filter(id=id, ativo=True).first()
-    desafios = Desafio.objects.filter(autor=perfil.id, ativo=True)
-    desafios_gerais = Desafio.objects.exclude(autor=perfil.id).filter(ativo=True)
-    respostas = Resposta.objects.filter(autor=perfil.id, ativo=True, desafio__ativo=True)
+    perfil = Perfil.objects.filter(id=id, ativo=True).first() #Busca de infos do perfil
+    desafios = Desafio.objects.filter(autor=perfil.id, ativo=True) #Busca de desafios criados pelo perfil
+    desafios_gerais = Desafio.objects.exclude(autor=perfil.id).filter(ativo=True) #Busca excluindo desafios criados pelo perfil
+    respostas = Resposta.objects.filter(autor=perfil.id, ativo=True, desafio__ativo=True) #Busca de resposta feitas pelo perfil
+
+    #Lista vaziaz para montar contexto
     criados = []
     gerais_filtrados = []
     respostas_likes = []
 
     #Entregar infos de likes de respostas criadas
     for resposta in respostas:
-        likes = Like.objects.filter(correspondente=resposta.id)
+        likes = Like.objects.filter(correspondente=resposta.id) #Busca de likes da resposta
 
         #Entregar uma lista de dicionários como contexto
-        if len(likes) != 0:
-            ultimo = likes.first()
+        if len(likes) != 0: #Se tiver likes
+            ultimo = likes.first() #Ultimo perfil que deu like
+
+            #Adicionar um dicionário ao array
             respostas_likes.append({
                 'resposta':resposta,
                 'like':ultimo.perfil.user,
-                'likes': len(likes)
+                'likes': len(likes) #Quantidade de likes
                 })
-        else:
+
+        else:  #Senão
+
+            #Entrega de contexto sem likes
             respostas_likes.append({ 
                 'resposta':resposta,
                 'like':'Sem likes!!'
@@ -93,18 +100,23 @@ def home(request, id):
 
     #Entregar apenas desafios não respondidos
     for desafio in desafios_gerais:
-        if Resposta.objects.filter(desafio__id=desafio.id, autor=perfil).first() is None:
-            likes = Like.objects.filter(correspondente=desafio.id)
-            seu_like = Like.objects.filter(correspondente=desafio.id, perfil=id).first()
+        if Resposta.objects.filter(desafio__id=desafio.id, autor=perfil).first() is None: #Se não houver resposta do perfil
+            likes = Like.objects.filter(correspondente=desafio.id) #Buscar likes do desafio
+            seu_like = Like.objects.filter(correspondente=desafio.id, perfil=id).first() #Buscar se perfil já deu like
 
             #Entregar uma lista de dicionários como contexto
-            if seu_like is None:
+            if seu_like is None: #Se seu like não existir
+
+                #Adicionar um dicionário ao Array
                 gerais_filtrados.append({
                     'desafio':desafio,
                     'vc':None,
-                    'likes': len(likes)
+                    'likes': len(likes) #Quantidade de likes
                     })
-            else:
+
+            else: #Senão
+
+                #Adicionar contexto de like com o perfil
                 gerais_filtrados.append({
                     'desafio':desafio,
                     'vc':'Você e mais ',
@@ -113,19 +125,24 @@ def home(request, id):
 
     #Entregar infos de likes de desafios criados
     for desafio in desafios:
-        respostas = Resposta.objects.filter(desafio=desafio)
-        likes = Like.objects.filter(correspondente=desafio.id)
+        respostas = Resposta.objects.filter(desafio=desafio) #Buscar respostas do desafio
+        likes = Like.objects.filter(correspondente=desafio.id) #Buscar likes do desafio
 
         #Entregar uma lista de dicionários como contexto
-        if len(likes) != 0:
-            ultimo = likes.first()
+        if len(likes) != 0: #Se houver likes
+            ultimo = likes.first() #Ultimo perfil a dar like
+
+            #Adicionar ao Array pra ser entregue como contexto
             criados.append({
                 'desafio':desafio,
-                'respostas': len(respostas),
+                'respostas': len(respostas), #Quantidade de respostas
                 'like':ultimo.perfil.user,
-                'likes': len(likes)
+                'likes': len(likes) #Quantidade de likes
                 })
-        else:
+
+        else: #Senão
+
+            #Contexto sem likes
             criados.append({ 
                 'desafio':desafio,
                 'respostas': len(respostas),
@@ -133,20 +150,24 @@ def home(request, id):
                 })
 
     #Entregar mensagem de 0 desafios criados
-    if desafios.first() is None:
+    if desafios.first() is None: #Se primeiro desafio não existir
+
+        #Contexto sem desafios
         context = {
-            'perfil':perfil,
+            'perfil':perfil, #Perfil do usuário
             'msg':'Você não criou nenhum desafio ainda, tente criar algum!!!!',
-            'respostas':respostas_likes,
-            'gerais':gerais_filtrados
+            'respostas':respostas_likes, #Array de respostas com infos
+            'gerais':gerais_filtrados #Array de desafios não respondidos com infos
         }
 
         return render(request, 'home.html', context)
 
-    else:
+    else: #Senão
+
+        #Contexto com desafios
         context = {
             'perfil':perfil,
-            'criados':criados,
+            'criados':criados, #Arrays com desafios criados e infos
             'respostas':respostas_likes,
             'gerais':gerais_filtrados
         }
@@ -158,15 +179,15 @@ def desafiar(request, id):
     #Entregar formulário
     form = DesafioForm()
 
-    #Para fazer um 'toogle' e verificar se desafio idêntico existente
+    #Para verificar se desafio idêntico existente
     context = {'desafio':form}
 
-    if request.method == 'POST':
+    if request.method == 'POST': #Se mátodo da requisição for post
         titulo = request.POST.get('titulo')
         tema = request.POST.get('tema')
         valor = request.POST.get('valor')
-        autor = Perfil.objects.filter(id=id, ativo=True).first()
-        filtro = Desafio.objects.filter(autor=autor, titulo=titulo, tema=tema, valor=valor, ativo=True).first()
+        autor = Perfil.objects.filter(id=id, ativo=True).first() #Buscar perfil do autor
+        filtro = Desafio.objects.filter(autor=autor, titulo=titulo, tema=tema, valor=valor, ativo=True).first() #Buscar se existe desafio idêntico
 
         context = {
 
@@ -176,6 +197,8 @@ def desafiar(request, id):
 
         #Verifica se Usuario já criou desafio idêntico
         if filtro is None:
+
+            #Criação de um desafio no banco
             desafio = Desafio(autor=autor, titulo=titulo, tema=tema, valor=valor)
             desafio.save()
 
@@ -189,14 +212,14 @@ def responder(request, id, id_desafio):
     #Entrega formulário
     form = RespostaForm()
     
-    #Fazer um 'toogle' pra verificação de resposta indêntica
+    #Para verificação de resposta idêntica
     context = {'resposta':form}
 
     if request.method == 'POST':
         valor = request.POST.get('valor')
-        autor = Perfil.objects.filter(id=id, ativo=True).first()
-        desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first()
-        filtro = Resposta.objects.filter(valor=valor, autor=autor, desafio=desafio, ativo=True).first()
+        autor = Perfil.objects.filter(id=id, ativo=True).first() #Buscar perfil do autor
+        desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first() #Buscar desafio correspondente
+        filtro = Resposta.objects.filter(valor=valor, autor=autor, desafio=desafio, ativo=True).first() #Filtrar existencia de resposta idêntica
         
         context = {
             'resposta':form,
@@ -205,6 +228,8 @@ def responder(request, id, id_desafio):
 
         #Verificação de Resposta indêntica
         if filtro is None:
+
+            #Criação de uma resposta no banco
             resposta = Resposta(valor=valor, autor=autor, desafio=desafio)
             resposta.save()
 
@@ -214,10 +239,10 @@ def responder(request, id, id_desafio):
 
 #Página de um desafio
 def desafio(request, id):
-    desafio = Desafio.objects.filter(id=id, ativo=True).first()
-    respostas = Resposta.objects.filter(desafio__id=id, ativo=True)
-    likes = Like.objects.filter(correspondente=id)
-    ultimo = likes.first()
+    desafio = Desafio.objects.filter(id=id, ativo=True).first() #Buscar desafio
+    respostas = Resposta.objects.filter(desafio__id=id, ativo=True) #Buscar respostas do desafio
+    likes = Like.objects.filter(correspondente=id) #Buscar likes
+    ultimo = likes.first() #Ultimo perfil a dar like
 
     #Entrega o contexto do desafio
     context = {
@@ -232,9 +257,9 @@ def desafio(request, id):
 
 #Página de um Perfil
 def usuario(request, user):
-    perfil = Perfil.objects.filter(user=user, ativo=True).first()
-    respostas = Resposta.objects.filter(autor__user=user, ativo=True)
-    desafios = Desafio.objects.filter(autor__user=user, ativo=True)
+    perfil = Perfil.objects.filter(user=user, ativo=True).first() #Buscar perfil
+    respostas = Resposta.objects.filter(autor__user=user, ativo=True) #Buscar respostas do perfil
+    desafios = Desafio.objects.filter(autor__user=user, ativo=True) #Buscar desafios criados pelo perfil
 
 
     #Entregar contexto do Perfil
@@ -253,22 +278,26 @@ def usuario(request, user):
 #Fazer um like em um desafio
 def like_desafio(request, id, id_desafio):
     
-    filtro = Like.objects.filter(correspondente=id_desafio, perfil__id=id).first()
+    filtro = Like.objects.filter(correspondente=id_desafio, perfil__id=id).first() #Buscar like já existente
 
     #Verificar se Usuário já deu like
     if filtro is None:
-        perfil = Perfil.objects.filter(id=id).first()
+        perfil = Perfil.objects.filter(id=id).first() #Buscar perfil do like
+
+        #Salvar like no banco
         like = Like(correspondente=id_desafio, perfil=perfil)
         like.save()
 
     return redirect('/home/{}'.format(id))
 
 def like_resposta(request, id, titulo, user):
-    resposta = Resposta.objects.filter(id=id, ativo=True).first()
-    filtro = Resposta.objects.filter(id=id, likes__perfil__id=user).first()
+    resposta = Resposta.objects.filter(id=id, ativo=True).first() #Buscar resposta
+    filtro = Resposta.objects.filter(id=id, likes__perfil__id=user).first() #Buscar like já existente
 
     if filtro is None:
-        perfil = Perfil.objects.filter(id=user).first()
+        perfil = Perfil.objects.filter(id=user).first() #Buscar perfil do like
+
+        #Salvar like no banco
         like = Like(perfil=perfil, correspondente=resposta.id)
         like.save()
 
@@ -278,11 +307,12 @@ def like_resposta(request, id, titulo, user):
 
 def delete_desafio(request, id, id_desafio):
 
-    desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first()
+    desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first() #Buscar desafio
 
     #Verificar a existencia do desafio
     if desafio is not None:
 
+        #Alterar para inativo
         desafio.ativo = False
         desafio.save()
 
