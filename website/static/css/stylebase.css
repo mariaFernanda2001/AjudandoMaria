@@ -30,21 +30,20 @@ footer p a{
     color: #979797;
     text-decoration: none;
 }
-nav{ align-items: center;
+.nav-base { align-items: center;
     background-color: #6f4584;
     display: flex;
-    margin-bottom: 10px;
-}
-nav img{
+    justify-content: space-between;
+} 
+.nav-base img{
     margin-left: 2px;
     width: 60px;
+   
     
 }
-nav p{
+.nav-base p{
     color: white;
     font-family: 'Major Mono Display', monospace;
     font-size: 35px;
-    margin-left: 43%;
-   
-  
-}
+    
+} 

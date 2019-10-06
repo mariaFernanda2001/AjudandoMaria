@@ -1,40 +1,63 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
-
-    <aside>
-        <ul>
-            <li><a href="desafiar/">Criar desafio</a></li>
-            <li><a href=""></a>Configurações</li>
-        </ul>
-    </aside>
-    <img src="/media/{{ perfil.avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
-    <h1>Home - {{ perfil.user }}</h1>
-    <a href="desafiar/{{perfil.id}}">+ Criar desafio</a>
-    <p>Seus desafios criados:</p>
-    <h4>{{ msg }}</h4>
+<input type="checkbox" id="check">
+<label id="icone" for="check"><img src="{% static 'images/menu.png' %}" alt=""></label>
+<div class="barra">
+    <nav class="nav-menu">
+        <a href="desafiar/{{perfil.id}}">
+            <div class="link">Desafiar</div>
+        </a>
+        <a href="">
+            <div class="link">Responder</div>
+        </a>
+        <a href="">
+            <div class="link">Desafio</div>
+        </a>
+        <a href="">
+            <div class="link">Perfis</div>
+        </a>
+        <a href="">
+            <div class="link">Configurações</div>
+        </a>
+    </nav>
+</div>
+ <div class="cabecalho">
+     <img src="/media/{{ perfil.avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
+     <p></p>
+    <h1>{{ perfil.user }}</h1>
+    <p></p>
+    <p></p>
+</div>
+    
+   <div class="desafios-criados">
+    <p> <div class="seus-desafios">SEUS DESAFIOS: </p>
+    </div>
+    <p class="msg">{{ msg }}</p>
     <div>
         {% for nomeado in nomeados %}
-            <div style="border: solid 1px black; margin: 5px; width: 200px; padding: 5px;">
+            <div class="desafio">
                 <a href="/desafio/{{ desafio.id }}" target="_blank" rel="noopener noreferrer">            
-                    <h4>- {{ nomeado.desafio.titulo }}</h4>
+                    <h4>Título: {{ nomeado.desafio.titulo }}</h4>
                 </a>
-                <p>Tema: {{ nomeado.desafio.tema }}</p>
-                <p>{{ nomeado.desafio.valor }}</p>
-                <p style="font-size:7pt;">{{ nomeado.desafio.criacao }}</p>
+                <p class="titulos">Tema: <p>{{ nomeado.desafio.tema }}</p> </p>
+                <!-- <p class="titulos">{{ nomeado.desafio.valor }}</p> -->
+                <p class="titulos">Data de criação<p>{{ nomeado.desafio.criacao }}</p></p>
+                <section class="titulos">
                 {% if nomeado.like != 'Sem likes!!' %}
-                    <p>likes - 
+                    likes - 
                         <a href="/{{ nomeado.like }}" target="_blank" rel="noopener noreferrer">
                             {{ nomeado.like }} 
                         </a>
                         e mais {{ nomeado.desafio.likes }} pessoas...
                     </p>
                 {% else %}
-                    <p>{{ nomeado.like }}</p>
+                    <p>{{ nomeado.like }}</</section> 
                 {% endif %}
                     <a href="/delete/{{ perfil.id }}/{{ nomeado.desafio.id }}">Excluir</a>
             </div>
         {% endfor %}
+    </div>
     </div>
     <p>Desafios respondidos:</p>
     <div>
