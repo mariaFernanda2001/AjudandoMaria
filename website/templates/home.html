@@ -35,26 +35,29 @@
     </div>
     <p class="msg">{{ msg }}</p>
     <div>
-        {% for nomeado in nomeados %}
+        {% for criado in criados %}
             <div class="desafio">
-                <a href="/desafio/{{ nomeado.desafio.id }}" target="_blank" rel="noopener noreferrer">            
-                    <h4>Título: {{ nomeado.desafio.titulo }}</h4>
+                <p>
+                    {{ criado.respostas }} - respostas
+                </p>
+                <a href="/desafio/{{ criado.desafio.id }}" target="_blank" rel="noopener noreferrer">            
+                    <h4>Título: {{ criado.desafio.titulo }}</h4>
                 </a>
-                <p class="titulos">Tema: <p>{{ nomeado.desafio.tema }}</p> </p>
+                <p class="titulos">Tema: <p>{{ criado.desafio.tema }}</p> </p>
                 <!-- <p class="titulos">{{ nomeado.desafio.valor }}</p> -->
-                <p class="titulos">Data de criação<p>{{ nomeado.desafio.criacao }}</p></p>
+                <p class="titulos">Data de criação<p>{{ criado.desafio.criacao }}</p></p>
                 <section class="titulos">
-                {% if nomeado.like != 'Sem likes!!' %}
+                {% if criado.like != 'Sem likes!!' %}
                     likes - 
-                        <a href="/{{ nomeado.like }}" target="_blank" rel="noopener noreferrer">
-                            {{ nomeado.like }} 
+                        <a href="/{{ criado.like }}" target="_blank" rel="noopener noreferrer">
+                            {{ criado.like }} 
                         </a>
-                        e mais {{ nomeado.desafio.likes }} pessoas...
+                        e mais {{ criado.likes }} pessoas...
                     </p>
                 {% else %}
-                    <p>{{ nomeado.like }}</</section> 
+                    <p>{{ criado.like }}</</section> 
                 {% endif %}
-                    <a href="/delete/{{ perfil.id }}/{{ nomeado.desafio.id }}">Excluir</a>
+                    <a href="/delete/{{ perfil.id }}/{{ criado.desafio.id }}">Excluir</a>
             </div>
         {% endfor %}
     </div>
@@ -64,10 +67,19 @@
         {% for resposta in respostas %}
             <div style="border: solid 1px black; margin: 10px; width: 200px; padding: 5px;">
                 <a href="/desafio/{{ resposta.desafio.id}}" target="_blank" rel="noopener noreferrer">
-                    <h4>- {{ resposta.desafio.titulo }}</h4>
+                    <h4>- {{ resposta.resposta.desafio.titulo }}</h4>
                 </a>
-                <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
-                <p style="font-size: 8pt;">{{ resposta.likes.perfil.user}} e mais {{ resposta.total }} pessoas deram like..</p>
+                <p style="font-size:7pt;">{{ resposta.resposta.desafio.criacao }}</p>
+                {% if resposta.like != 'Sem likes!!' %}
+                    likes - 
+                        <a href="/{{ criado.like }}" target="_blank" rel="noopener noreferrer">
+                            {{ resposta.like }} 
+                        </a>
+                        e mais {{ resposta.likes }} pessoas...
+                    </p>
+                {% else %}
+                    <p>{{ resposta.like }}</</section> 
+                {% endif %}
             </div>
         {% endfor %}
     </div id= "responder">
@@ -87,9 +99,10 @@
                 <p style="font-size:7pt;">{{ item.desafio.criacao }}</p>
                 <a href="responder/{{ perfil.id }}/{{ item.desafio.id }}">Responder</a>
                 {% if item.vc == None %}
-                    <a href="/like/d/{{ perfil.id }}/{{ item.desafio.id }}" style="font-size: 10pt;">Dar like - {{ item.desafio.likes }} pessoas deram like..</a>
+                    <a href="/like/d/{{ perfil.id }}/{{ item.desafio.id }}">like!!</a>
+                    <p>{{ item.likes }} pessoas deram like..</p>
                 {% else %}
-                    <p style="font-size: 10pt;">{{ item.vc }}{{ item.desafio.likes }} pessoas deram like...</p>
+                    <p style="font-size: 10pt;">{{ item.vc }}{{ item.likes }} pessoas deram like...</p>
                 {% endif %}
             </div>
         {% endfor %}

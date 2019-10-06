@@ -69,36 +69,66 @@ def home(request, id):
     desafios = Desafio.objects.filter(autor=perfil.id, ativo=True)
     desafios_gerais = Desafio.objects.exclude(autor=perfil.id).filter(ativo=True)
     respostas = Resposta.objects.filter(autor=perfil.id, ativo=True, desafio__ativo=True)
-    nomeados = []
+    criados = []
     gerais_filtrados = []
+    respostas_likes = []
+
+    #Entregar infos de likes de respostas criadas
+    for resposta in respostas:
+        likes = Like.objects.filter(correspondente=resposta.id)
+
+        #Entregar uma lista de dicionários como contexto
+        if len(likes) != 0:
+            ultimo = likes.first()
+            respostas_likes.append({
+                'resposta':resposta,
+                'like':ultimo.perfil.user,
+                'likes': len(likes)
+                })
+        else:
+            respostas_likes.append({ 
+                'resposta':resposta,
+                'like':'Sem likes!!'
+                })
 
     #Entregar apenas desafios não respondidos
     for desafio in desafios_gerais:
         if Resposta.objects.filter(desafio__id=desafio.id, autor=perfil).first() is None:
-            like = Like.objects.filter(perfil=id, correspondente=desafio.id).first()
+            likes = Like.objects.filter(correspondente=desafio.id)
+            seu_like = Like.objects.filter(correspondente=desafio.id, perfil=id).first()
 
-            if like is None:
+            #Entregar uma lista de dicionários como contexto
+            if seu_like is None:
                 gerais_filtrados.append({
                     'desafio':desafio,
-                    'vc':None
+                    'vc':None,
+                    'likes': len(likes)
                     })
             else:
                 gerais_filtrados.append({
                     'desafio':desafio,
-                    'vc':'Você e mais '
+                    'vc':'Você e mais ',
+                    'likes':len(likes)
                     })
 
     #Entregar infos de likes de desafios criados
     for desafio in desafios:
-        if desafio.likes != 0:
-            like = Like.objects.filter(correspondente=desafio.id).first()
-            nomeados.append({
+        respostas = Resposta.objects.filter(desafio=desafio)
+        likes = Like.objects.filter(correspondente=desafio.id)
+
+        #Entregar uma lista de dicionários como contexto
+        if len(likes) != 0:
+            ultimo = likes.first()
+            criados.append({
                 'desafio':desafio,
-                'like':like.perfil.user
+                'respostas': len(respostas),
+                'like':ultimo.perfil.user,
+                'likes': len(likes)
                 })
         else:
-            nomeados.append({ 
+            criados.append({ 
                 'desafio':desafio,
+                'respostas': len(respostas),
                 'like':'Sem likes!!'
                 })
 
@@ -107,7 +137,7 @@ def home(request, id):
         context = {
             'perfil':perfil,
             'msg':'Você não criou nenhum desafio ainda, tente criar algum!!!!',
-            'respostas':respostas,
+            'respostas':respostas_likes,
             'gerais':gerais_filtrados
         }
 
@@ -116,8 +146,8 @@ def home(request, id):
     else:
         context = {
             'perfil':perfil,
-            'nomeados':nomeados,
-            'respostas':respostas,
+            'criados':criados,
+            'respostas':respostas_likes,
             'gerais':gerais_filtrados
         }
 
@@ -186,12 +216,16 @@ def responder(request, id, id_desafio):
 def desafio(request, id):
     desafio = Desafio.objects.filter(id=id, ativo=True).first()
     respostas = Resposta.objects.filter(desafio__id=id, ativo=True)
+    likes = Like.objects.filter(correspondente=id)
+    ultimo = likes.first()
 
     #Entrega o contexto do desafio
     context = {
 
         'desafio':desafio,
         'respostas':respostas,
+        'likes':len(likes),
+        'like':ultimo.perfil.user
     }
 
     return render(request, 'desafio.html', context)
@@ -201,6 +235,7 @@ def usuario(request, user):
     perfil = Perfil.objects.filter(user=user, ativo=True).first()
     respostas = Resposta.objects.filter(autor__user=user, ativo=True)
     desafios = Desafio.objects.filter(autor__user=user, ativo=True)
+
 
     #Entregar contexto do Perfil
     if perfil is not None:
@@ -225,9 +260,6 @@ def like_desafio(request, id, id_desafio):
         perfil = Perfil.objects.filter(id=id).first()
         like = Like(correspondente=id_desafio, perfil=perfil)
         like.save()
-        desafio = Desafio.objects.filter(id=id_desafio).first()
-        desafio.likes += 1
-        desafio.save()
 
     return redirect('/home/{}'.format(id))
 
@@ -237,11 +269,8 @@ def like_resposta(request, id, titulo, user):
 
     if filtro is None:
         perfil = Perfil.objects.filter(id=user).first()
-        like = Like(perfil=perfil)
+        like = Like(perfil=perfil, correspondente=resposta.id)
         like.save()
-        resposta.likes = like
-        resposta.total += 1
-        resposta.save()
 
         return redirect('/desafio/{}'.format(resposta.desafio.id))
 

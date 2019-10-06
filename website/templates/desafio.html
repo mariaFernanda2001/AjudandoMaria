@@ -7,6 +7,12 @@
     <p>{{ desafio.valor }}</p>
     <p>Autor: <a href="/{{ desafio.autor.user }}" target="_blank" rel="noopener noreferrer">{{ desafio.autor.user }}</a></p>
     <p>{{ desafio.criacao }}</p>
+    <p>likes - 
+        <a href="/{{like}}" target="_blank" rel="noopener noreferrer">
+            {{like}}
+        </a>
+        e mais {{ likes }} pessoas...
+    </p>
     <div style="display: flex; justify-content: center;">
         {% for resposta in respostas %}
             <div style="border: solid 1px black; margin: 10px; padding: 15px; width:100%;">
