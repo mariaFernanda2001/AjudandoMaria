@@ -37,7 +37,7 @@
     <div>
         {% for nomeado in nomeados %}
             <div class="desafio">
-                <a href="/desafio/{{ desafio.id }}" target="_blank" rel="noopener noreferrer">            
+                <a href="/desafio/{{ nomeado.desafio.id }}" target="_blank" rel="noopener noreferrer">            
                     <h4>Título: {{ nomeado.desafio.titulo }}</h4>
                 </a>
                 <p class="titulos">Tema: <p>{{ nomeado.desafio.tema }}</p> </p>
