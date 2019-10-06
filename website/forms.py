@@ -2,7 +2,7 @@ from django import forms
 from website.models import *
 
 class  LoginForm(forms.Form):
-    email = forms.EmailField(label='Email', widget=forms.widgets.EmailInput(), required=True)
+    email = forms.EmailField(label='Email', widget=forms.widgets.EmailInput(), required=True,)
     senha = forms.CharField(label='Senha', widget=forms.widgets.PasswordInput(), required=True, max_length=15)
 
 class UsuarioForm(LoginForm):

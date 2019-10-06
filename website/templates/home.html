@@ -63,7 +63,11 @@
                 <p>{{ item.desafio.valor }}</p>
                 <p style="font-size:7pt;">{{ item.desafio.criacao }}</p>
                 <a href="responder/{{ perfil.id }}/{{ item.desafio.id }}">Responder</a>
-                <a href="/like/d/{{ perfil.id }}/{{ item.desafio.id }}" style="font-size: 10pt;">Dar like - {{ item.desafio.likes }}</a>
+                {% if item.vc == None %}
+                    <a href="/like/d/{{ perfil.id }}/{{ item.desafio.id }}" style="font-size: 10pt;">Dar like - {{ item.desafio.likes }} pessoas deram like..</a>
+                {% else %}
+                    <p style="font-size: 10pt;">{{ item.vc }}{{ item.desafio.likes }} pessoas deram like...</p>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
