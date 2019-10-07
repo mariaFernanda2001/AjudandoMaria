@@ -23,7 +23,7 @@
     </nav>
 </div>
  <div class="cabecalho">
-     <img src="/media/{{ perfil.avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;">
+     <!-- <img src="/media/{{ perfil.avatar }}" alt="" style="border-radius:50%; width:100px; height:100px;"> -->
      <p></p>
     <h1>{{ perfil.nome }}</h1>
     <p></p>
@@ -55,17 +55,18 @@
                         e mais {{ criado.likes }} pessoas...
                     </p>
                 {% else %}
-                    <p>{{ criado.like }}</</section> 
+                    <p>{{ criado.like }} 
                 {% endif %}
                     <a href="/delete/{{ perfil.id }}/{{ criado.desafio.id }}">Excluir</a>
             </div>
         {% endfor %}
     </div>
     </div>
-    <p>Desafios respondidos:</p>
+    <div  class= "bloco-desafios-respondidos">
+    <p><div class= "p-desafios-respondidos">Desafios respondidos:</p></div> 
     <div>
         {% for resposta in respostas %}
-            <div style="border: solid 1px black; margin: 10px; width: 200px; padding: 5px;">
+            <div class="desafio-respondido">
                 <a href="/desafio/{{ resposta.desafio.id}}" target="_blank" rel="noopener noreferrer">
                     <h4>- {{ resposta.resposta.desafio.titulo }}</h4>
                 </a>
@@ -78,11 +79,12 @@
                         e mais {{ resposta.likes }} pessoas...
                     </p>
                 {% else %}
-                    <p>{{ resposta.like }}</</section> 
+                    <p>{{ resposta.like }}
                 {% endif %}
             </div>
         {% endfor %}
-    </div id= "responder">
+    </div id= "responder"></div>
+    
     <h2>Veja os desafios de geral!!!</h2>
     <p>Desafios da comunidade:</p>
     <div style="display: flex; justify-content: center;">

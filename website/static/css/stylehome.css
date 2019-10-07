@@ -32,7 +32,26 @@
   margin-top: 10px;
 
 }
+.bloco-desafios-respondidos{
+    background-color: #97979729;
+     margin: 10px;
+     padding: 5px 5px; 
+    justify-items: center;
+    display: flex;
+    
+   
+}
+.p-desafios-respondidos{
+    text-align: center;
+    color: #704483;
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
 
+}
 a{color: #704483;
     text-decoration: none;
     font-family: 'Oswald', sans-serif;
