@@ -26,7 +26,23 @@
     box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
 }
 
+.desafio-respondido{
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
+}
+.desafio-geral{
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
+    
+    
+}
+
 .desafios-criados div{
+    align-items: center;
+     padding: 5px 5px;
+  margin-top: 10px;
+
+}
+
+.bloco-desafios-respondidos div{
     align-items: center;
      padding: 5px 5px;
   margin-top: 10px;
@@ -37,10 +53,30 @@
      margin: 10px;
      padding: 5px 5px; 
     justify-items: center;
-    display: flex;
-    
+    display: flex;   
    
 }
+.h2-desafios-gerais{
+    color: #704483;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.bloco-desafios-gerais div{
+    align-items: center;
+     padding: 5px 5px;
+  margin-top: 10px;
+
+}
+
+.bloco-desafios-gerais{
+    background-color: #f9f4f4;
+     margin: 10px;
+     padding: 5px 5px; 
+    justify-content: space-between;
+}
+
+
 .p-desafios-respondidos{
     text-align: center;
     color: #704483;
@@ -94,7 +130,10 @@ label img{
 .nav-menu a {
     text-decoration: none;
 }
-
+.likes{
+    color: #868282;
+    font-size: 12px;
+}
 .link{
     background-color: #d5bfcb;
     padding: 20px;
@@ -108,11 +147,15 @@ label img{
 
 }
 .link:hover{
-background-color: #704483;
+background-color: #9d94a1;
 }
 #check:checked ~ .barra{
 transform: translateX(200px);
 
+}
+
+.respostas{
+    color: #868282;
 }
 
 .seus-desafios{
@@ -127,9 +170,37 @@ transform: translateX(200px);
     
     
 }
+
 .titulos{
     color: #baaac1;
     font-family: 'Oswald', sans-serif;
     padding: 2px;
 
+}
+.titulos-respondidos{
+    color: #baaac1;
+    font-family: 'Oswald', sans-serif;
+    padding: 2px;
+
+}
+
+.titulos-gerais{
+    color: #baaac1;
+    font-family: 'Oswald', sans-serif;
+    padding: 2px;
+
+}
+.tema{
+    color: #6e4981;
+}
+.tema-valor{
+    color: #868282;
+}
+
+
+.te-desafia{
+    color: #868282;
+}
+.responder{
+    font-size: 13px;
 }
