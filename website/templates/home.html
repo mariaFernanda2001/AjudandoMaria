@@ -8,11 +8,11 @@
         <a href="desafiar/{{perfil.id}}">
             <div class="link">Desafiar</div>
         </a>
-        <a href="">
+        <a href="#responder">
             <div class="link">Responder</div>
         </a>
-        <a href="">
-            <div class="link">Desafio</div>
+        <a href="#seus-desafios">
+            <div class="link">Seus Desafios</div>
         </a>
         <a href="">
             <div class="link">Perfis</div>
@@ -29,8 +29,7 @@
     <p></p>
     <p></p>
 </div>
-
-<div class="desafios-criados">
+<div id= seus-desafios><div class="desafios-criados">
     <p>
         <div class="seus-desafios">SEUS DESAFIOS:
     </p>
@@ -66,7 +65,8 @@
     </div>
     {% endfor %}
 </div>
-</div>
+</div></div>
+
 <div class="bloco-desafios-respondidos">
     <p>
         <div class="p-desafios-respondidos">DESAFIOS RESPONDIDOS:</div>
@@ -90,10 +90,10 @@
         {% endif %}
 </div>
 {% endfor %}
-</div id="responder">
+</div >
 </div>
 
-<h2 class="h2-desafios-gerais">DESAFIOS GERAIS:</h2>
+<div id="responder"><h2 class="h2-desafios-gerais">DESAFIOS GERAIS:</h2>
 <div class="bloco-desafios-gerais">
     
         {% for item in gerais %} 
@@ -123,6 +123,7 @@
 
         {% endfor %}
     </div>
+</div>
 </div>
 
 {% endblock %}
