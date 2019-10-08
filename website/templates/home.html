@@ -39,7 +39,7 @@
     {% for elemento in criados %}
         <div class="desafio">
 
-            <a href="/desafio/{{ criado.desafio.id }}" target="_blank" rel="noopener noreferrer">
+            <a href="/desafio/{{ elemento.desafio.id }}" target="_blank" rel="noopener noreferrer">
                 <h4>Título: {{ elemento.desafio.titulo }}</h4>
             </a>
             <p class="titulos" style="font-size:7pt;">{{ elemento.desafio.criacao }}</p>
@@ -52,7 +52,7 @@
 
                 <p>
                     likes -
-                    <a href="/{{ criado.like }}" target="_blank" rel="noopener noreferrer">
+                    <a href="/{{ elemento.like }}" target="_blank" rel="noopener noreferrer">
                         {{ elemento.like }}
                     </a>
                     e mais {{ elemento.likes }} pessoas...
@@ -65,7 +65,7 @@
             {% endif %}
 
                 <p class="respostas">{{ elemento.respostas }} - respostas</p>
-                <a href="/delete/{{ perfil.id }}/{{ criado.desafio.id }}">Excluir</a>
+                <a href="/delete/{{ perfil.id }}/{{ elemento.desafio.id }}">Excluir</a>
         </div>
     {% endfor %}
 </div>
@@ -88,7 +88,7 @@
 
                     <p>
                         likes -
-                        <a href="/{{ criado.like }}" target="_blank" rel="noopener noreferrer">
+                        <a href="/{{ elemento.like }}" target="_blank" rel="noopener noreferrer">
                             {{ elemento.like }}
                         </a>
                         e mais {{ elemento.likes }} pessoas...
