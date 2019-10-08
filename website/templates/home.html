@@ -71,25 +71,25 @@
     <p>
         <div class="p-desafios-respondidos">DESAFIOS RESPONDIDOS:</div>
         <div>
-            {% for resposta in respostas %}
+            {% for elemento in respostas %}
             <div class="desafio-respondido">
-                <a href="/desafio/{{ resposta.desafio.id}}" target="_blank" rel="noopener noreferrer">
-                    <h4>Título:{{ resposta.resposta.desafio.titulo }}</h4>
+                <a href="/desafio/{{ elemento.resposta.desafio.id}}" target="_blank" rel="noopener noreferrer">
+                    <h4>Título:{{ elemento.resposta.desafio.titulo }}</h4>
                 </a>
-                <p class=titulos-respondidos style="font-size:7pt;">{{ resposta.resposta.desafio.criacao }}</p>
+                <p class=titulos-respondidos style="font-size:7pt;">{{ elemento.resposta.desafio.criacao }}</p>
                 <section class="likes">
-                    {% if resposta.like != 'Sem likes!!' %}
-                    likes -
-                    <a href="/{{ criado.like }}" target="_blank" rel="noopener noreferrer">
-                        {{ resposta.like }}
-                    </a>
-                    e mais {{ resposta.likes }} pessoas...
+                    {% if elemento.like != 'Sem likes!!' %}
+                        likes -
+                        <a href="/{{ criado.like }}" target="_blank" rel="noopener noreferrer">
+                            {{ elemento.like }}
+                        </a>
+                        e mais {{ elemento.likes }} pessoas...
+                    {% else %}
+                        {{ elemento.like }}
+                    {% endif %}
+            {% endfor %}
     </p>
-    {% else %}
-    <p>{{ resposta.like }}
-        {% endif %}
 </div>
-{% endfor %}
 </div >
 </div>
 
