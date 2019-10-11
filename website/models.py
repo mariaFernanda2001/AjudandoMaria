@@ -4,7 +4,7 @@ import uuid
 class Perfil(models.Model):
     
     id = models.UUIDField(primary_key= True,default=uuid.uuid4, editable=False)
-    avatar = models.FileField(upload_to='avatar/')
+    avatar = models.ImageField(upload_to='avatar/')
     user = models.CharField(max_length=15, unique=True, null=False)
     email = models.EmailField(unique=True, null=False)
     nome = models.CharField(max_length=15, null=False)

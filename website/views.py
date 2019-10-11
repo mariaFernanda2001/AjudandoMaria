@@ -10,6 +10,7 @@ def cadastrar(request):
     if request.method == 'POST':
 
         #Pegar Valores do forms
+        avatar = request.FILES.get('avatar')
         user = request.POST.get('user')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
@@ -34,7 +35,7 @@ def cadastrar(request):
         else:
 
             #Cadastra e acessa home
-            perfil = Perfil(user=user, sobrenome=sobrenome, mensagem=mensagem, nome=nome, email=email, telefone=telefone, senha=senha)
+            perfil = Perfil(avatar=avatar, user=user, sobrenome=sobrenome, mensagem=mensagem, nome=nome, email=email, telefone=telefone, senha=senha)
             perfil.save()
             
             return redirect('/home/{}'.format(perfil.id))

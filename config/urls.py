@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from website import views
+from django.conf import settings 
+from django.conf.urls.static import static 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +31,4 @@ urlpatterns = [
     path('<str:user>', views.usuario),
     path('like/d/<str:id>/<str:id_desafio>', views.like_desafio),
     path('like/r/<str:id>/<str:id_desafio>', views.like_resposta)
-]
-# + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
