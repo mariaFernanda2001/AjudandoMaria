@@ -13,7 +13,7 @@
         </a>
         e mais {{ likes }} pessoas...
     </p>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Responder">
@@ -25,6 +25,7 @@
                 <p>Autor: <a href="/{{ resposta.autor.user }}" target="_blank" rel="noopener noreferrer">{{ resposta.autor.user }}</a></p>
                 <a href="/like/r/{{ resposta.id }}" style="font-size: 10pt;">likes - {{ resposta.likes.perfil.user }} e mais {{ resposta.total }} pessoas..</a>
                 <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
+                <img src="/media/{{ resposta.imagem }}" alt="">
             </div>
         {% endfor %}
     </div>

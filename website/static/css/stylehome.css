@@ -47,9 +47,9 @@ a h4:hover{
 
 }
 .cabecalho{
-   align-items: center;
+   
    justify-content: space-between;
-   display: flex;
+   margin-left: 45%;
    color: #704483;
    font-family: 'Oswald', sans-serif;
   
@@ -57,6 +57,13 @@ a h4:hover{
 .cabecalho p{
     color: white;
 }
+.cabecalho img{
+ border-radius:50%;
+ width:100px; 
+ height:100px;
+ }
+ 
+
 #check{
     display: none;
 }
@@ -211,5 +218,24 @@ background-color: #9d94a1;
 }
 
 @media (min-width:580px){
+
+    .desafio{
+        box-shadow:none;
+    }
+    .desafios-criados{
+        background-color: #f9f4f4;
+        margin: 10px;
+        padding: 5px 5px; 
+        display: flex;
+        
+    }
+    
+    .desafios-criados div{
+      text-align: initial;
+      padding: 5px 15px;
+      margin-top: 2px;
+      font-size:20px;
+    
+    }
 
 }
