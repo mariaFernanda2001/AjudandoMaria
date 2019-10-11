@@ -1,93 +1,7 @@
 *{
     font-family: 'Roboto', sans-serif;
 }
-.cabecalho{
-   align-items: center;
-   justify-content: space-between;
-   display: flex;
-   color: #704483;
-   font-family: 'Oswald', sans-serif;
-  
-}
-#check{
-    display: none;
-}
-.desafios-criados{
-    background-color: #f9f4f4;
-   /* box-shadow: 5px 5px 5px rgba(0,0,0,0.2);  */
-   margin: 10px;
-     padding: 5px 5px; 
-    justify-items: center;
-    display: flex;
-    
-   
-}
-.desafio{
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
-}
 
-.desafio-respondido{
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
-}
-.desafio-geral{
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
-    
-    
-}
-
-.desafios-criados div{
-    align-items: center;
-     padding: 5px 5px;
-  margin-top: 10px;
-
-}
-
-.bloco-desafios-respondidos div{
-    align-items: center;
-     padding: 5px 5px;
-  margin-top: 10px;
-
-}
-.bloco-desafios-respondidos{
-    background-color: #97979729;
-     margin: 10px;
-     padding: 5px 5px; 
-    justify-items: center;
-    display: flex;   
-   
-}
-.h2-desafios-gerais{
-    color: #704483;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-}
-.bloco-desafios-gerais div{
-    align-items: center;
-     padding: 5px 5px;
-  margin-top: 10px;
-
-}
-
-.bloco-desafios-gerais{
-    background-color: #f9f4f4;
-     margin: 10px;
-     padding: 5px 5px; 
-    justify-content: space-between;
-}
-
-
-.p-desafios-respondidos{
-    text-align: center;
-    color: #704483;
-    display: block;
-    font-family: 'Oswald', sans-serif;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-
-}
 a{color: #704483;
     text-decoration: none;
     font-family: 'Oswald', sans-serif;
@@ -98,11 +12,94 @@ a:hover{
 a h4:hover{
     background-color: #e3dfe6;
 }
-.msg{
-  font-family: 'Montserrat', sans-serif;
-  text-align: center;
-  
+.barra{
+    background-color: #f9f4f4;
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    transition: all .2s linear; 
+    left: -200px;
+}
+.bloco-desafios-gerais{
+    background-color: #f9f4f4;
+     margin: 10px;
+     padding: 5px 5px; 
+    justify-content: space-between;
+}
+.bloco-desafios-gerais div{
+    align-items: center;
+     padding: 5px 5px;
+  margin-top: 10px;
 
+}
+.bloco-desafios-respondidos{
+    background-color: #97979729;
+     margin: 10px;
+     padding: 5px 5px; 
+     justify-content: space-between;
+    
+   
+}
+.bloco-desafios-respondidos div{
+    align-items: center;
+     padding: 5px 5px;
+  margin-top: 10px;
+
+}
+.cabecalho{
+   align-items: center;
+   justify-content: space-between;
+   display: flex;
+   color: #704483;
+   font-family: 'Oswald', sans-serif;
+  
+}
+.cabecalho p{
+    color: white;
+}
+#check{
+    display: none;
+}
+
+#check:checked ~ .barra{
+    transform: translateX(200px);
+    
+    }
+.desafio{
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
+}
+.desafios-criados{
+    background-color: #f9f4f4;
+    margin: 10px;
+    padding: 5px 5px; 
+    justify-content: space-between;
+   
+}
+
+.desafios-criados div{
+    align-items: center;
+     padding: 5px 5px;
+  margin-top: 10px;
+
+}
+
+.desafio-geral{
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
+    
+    
+}
+.desafio-respondido{
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.1); 
+}
+
+
+
+.h2-desafios-gerais{
+    color: #704483;
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 #icone{
     cursor: pointer;
@@ -113,22 +110,6 @@ a h4:hover{
 label img{
     width: 30px;
 
-}
-.barra{
-    background-color: #f9f4f4;
-    height: 100%;
-    width: 200px;
-    position: absolute;
-    transition: all .2s linear; 
-    left: -200px;
-}
-.nav-menu{width: 100%;
-    position: absolute;
-    top: 60px;
-
-}
-.nav-menu a {
-    text-decoration: none;
 }
 .likes{
     color: #868282;
@@ -149,9 +130,34 @@ label img{
 .link:hover{
 background-color: #9d94a1;
 }
-#check:checked ~ .barra{
-transform: translateX(200px);
+.msg{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    
+  
+  }
+.nav-menu{width: 100%;
+    position: absolute;
+    top: 60px;
 
+}
+.nav-menu a {
+    text-decoration: none;
+}
+.p-desafios-respondidos{
+    text-align: center;
+    color: #704483;
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+
+}
+
+.responder{
+    font-size: 13px;
 }
 
 .respostas{
@@ -177,18 +183,9 @@ transform: translateX(200px);
     padding: 2px;
 
 }
-.titulos-respondidos{
-    color: #baaac1;
-    font-family: 'Oswald', sans-serif;
-    padding: 2px;
 
-}
-
-.titulos-gerais{
-    color: #baaac1;
-    font-family: 'Oswald', sans-serif;
-    padding: 2px;
-
+.te-desafia{
+    color: #868282;
 }
 .tema{
     color: #6e4981;
@@ -196,11 +193,23 @@ transform: translateX(200px);
 .tema-valor{
     color: #868282;
 }
+.titulos-gerais{
+    color: #baaac1;
+    font-family: 'Oswald', sans-serif;
+    padding: 2px;
 
-
-.te-desafia{
-    color: #868282;
 }
+.titulos-respondidos{
+    color: #baaac1;
+    font-family: 'Oswald', sans-serif;
+    padding: 2px;
+
+}
+
 .responder{
     font-size: 13px;
+}
+
+@media (min-width:580px){
+
 }
