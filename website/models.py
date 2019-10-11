@@ -9,7 +9,6 @@ class Perfil(models.Model):
     email = models.EmailField(unique=True, null=False)
     nome = models.CharField(max_length=15, null=False)
     sobrenome = models.CharField(max_length=15, null=False)
-    mensagem = models.CharField(max_length=50, default='')
     senha = models.CharField(max_length=15, null=False)
     telefone = models.CharField(max_length=14, null=False)
     ativo = models.BooleanField(default=True)
