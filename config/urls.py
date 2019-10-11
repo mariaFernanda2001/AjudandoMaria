@@ -25,9 +25,8 @@ urlpatterns = [
     path('', views.login),
     path('home/<str:id>', views.home),
     path('home/desafiar/<str:id>', views.desafiar),
-    path('home/responder/<str:id>/<str:id_desafio>/', views.responder),
     path('delete/<str:id>/<str:id_desafio>/', views.delete_desafio),
-    path('desafio/<str:id>', views.desafio),
+    path('desafio/<str:id>/<str:id_desafio>/', views.desafio),
     path('<str:user>', views.usuario),
     path('like/d/<str:id>/<str:id_desafio>', views.like_desafio),
     path('like/r/<str:id>/<str:id_desafio>', views.like_resposta)
