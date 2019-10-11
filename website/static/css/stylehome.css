@@ -49,7 +49,7 @@ a h4:hover{
 .cabecalho{
    
    justify-content: space-between;
-   margin-left: 40%;
+   margin-left: 45%;
    color: #704483;
    font-family: 'Oswald', sans-serif;
   
@@ -61,7 +61,7 @@ a h4:hover{
  border-radius:50%;
  width:100px; 
  height:100px;
- margin-left: 10px;}
+ }
  
 
 #check{
