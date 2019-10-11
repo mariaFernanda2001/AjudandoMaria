@@ -57,6 +57,13 @@ a h4:hover{
 .cabecalho p{
     color: white;
 }
+.cabecalho img{
+ border-radius:50%;
+ width:100px; 
+ height:100px;
+margin-left: 10px;}
+ 
+
 #check{
     display: none;
 }
