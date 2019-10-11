@@ -223,7 +223,8 @@ def desafio(request, id, id_desafio):
     
     #Para verificação de resposta idêntica
     if request.method == 'POST':
-        valor = request.POST.get('valor')
+        imagem = request.FILES.get('imagem')
+        valor = request.POST.get('texto')
         autor = Perfil.objects.filter(id=id, ativo=True).first() #Buscar perfil do autor
         desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first() #Buscar desafio correspondente
         filtro = Resposta.objects.filter(valor=valor, autor=autor, desafio=desafio, ativo=True).first() #Filtrar existencia de resposta idêntica
@@ -232,7 +233,7 @@ def desafio(request, id, id_desafio):
         if filtro is None:
 
             #Criação de uma resposta no banco
-            resposta = Resposta(valor=valor, autor=autor, desafio=desafio)
+            resposta = Resposta(valor=valor, autor=autor, desafio=desafio, imagem=imagem)
             resposta.save()
         
 

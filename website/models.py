@@ -38,3 +38,4 @@ class Resposta(models.Model):
     desafio = models.ForeignKey(Desafio, on_delete=models.CASCADE)
     ativo = models.BooleanField(default=True)
     criacao = models.DateTimeField(auto_now_add=True)
+    imagem = models.ImageField(upload_to='fotos/')

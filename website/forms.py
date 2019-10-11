@@ -22,7 +22,6 @@ class DesafioForm(forms.ModelForm): #Usa uma model para criar campos
         model = Desafio
         fields = ('titulo', 'tema', 'valor')
 
-class RespostaForm(forms.ModelForm):
-    class Meta:
-        model = Resposta
-        fields = ('valor',)
+class RespostaForm(forms.Form):
+    imagem = forms.ImageField(label='Enviar imagem', widget=forms.widgets.ClearableFileInput)
+    texto =  forms.CharField(max_length=240, widget=forms.widgets.Textarea)
