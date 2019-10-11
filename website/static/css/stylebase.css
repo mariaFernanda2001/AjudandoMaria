@@ -9,10 +9,7 @@ footer{
     justify-content: space-between;  
     }
     
-.footer-escuro{
-    background-color: #baaac1;
-    height: 5px;
-}
+
 footer img{
     margin-right: 5px;
     margin-top: 3px;
@@ -23,7 +20,7 @@ footer img{
 footer p{
     color: #979797;
     font-family: 'Montserrat';
-margin-left: 5px;
+    margin-left: 5px;
 }
 footer p a{
     
