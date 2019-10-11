@@ -13,6 +13,11 @@
         </a>
         e mais {{ likes }} pessoas...
     </p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Responder">
+    </form>
     <div style="display: flex; justify-content: center;">
         {% for resposta in respostas %}
             <div style="border: solid 1px black; margin: 10px; padding: 15px; width:100%;">

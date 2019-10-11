@@ -77,22 +77,22 @@
 <div class="bloco-desafios-respondidos">
     <p></p>
     <div>
-        {% for resposta in respostas %}
+        {% for elem in respostas %}
         <div class="desafio-respondido">
-            <a href="/desafio/{{ resposta.desafio.id}}" target="_blank" rel="noopener noreferrer">
-                <h4>Título:{{ resposta.resposta.desafio.titulo }}</h4>
+            <a href="/desafio/{{ perfil.id}}/{{ elem.resposta.desafio.id}}" target="_blank" rel="noopener noreferrer">
+                <h4>Título:{{ elem.resposta.desafio.titulo }}</h4>
             </a>
-            <p class=titulos-respondidos style="font-size:7pt;">{{ resposta.resposta.desafio.criacao }}</p>
+            <p class=titulos-respondidos style="font-size:7pt;">{{ elem.resposta.desafio.criacao }}</p>
             <section class="likes">
-                {% if resposta.like != 'Sem likes!!' %}
+                {% if elem.like != 'Sem likes!!' %}
                 likes -
                 <a href="/{{ criado.like }}" target="_blank" rel="noopener noreferrer">
-                    {{ resposta.like }}
+                    {{ elem.like }}
                 </a>
-                e mais {{ resposta.likes }} pessoas...
+                e mais {{ elem.likes }} pessoas...
 
                 {% else %}
-                <p>{{ resposta.like }}
+                <p>{{ elem.like }}
                     {% endif %}
         </div>
         {% endfor %}
@@ -112,14 +112,11 @@
                 <a href="/{{ item.desafio.autor.user }}" target="_blank"
                     rel="noopener noreferrer">{{ item.desafio.autor.user }}</a> te desafia!!
                 </h3>
-                <a href="/desafio/{{ item.desafio.id }}" target="_blank" rel="noopener noreferrer">
+                <a href="/desafio/{{ perfil.id }}/{{ item.desafio.id }}" target="_blank" rel="noopener noreferrer">
                     <h4>Título: {{ item.desafio.titulo }}</h4>
                 </a>
                 <p class="titulos" style="font-size:7pt;">{{ item.desafio.criacao }}</p>
                 <p class="tema">Tema: <p class="tema-valor">{{ item.desafio.tema }}</p>
-                </p>
-
-                <a class="responder" href="responder/{{ perfil.id }}/{{ item.desafio.id }}">Responder</a>
                 <section class="likes">
                     {% if item.vc == None %}
                     <a href="/like/d/{{ perfil.id }}/{{ item.desafio.id }}">like!!</a>
