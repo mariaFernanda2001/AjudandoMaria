@@ -25,7 +25,7 @@
                 <p>Autor: <a href="/{{ resposta.autor.user }}" target="_blank" rel="noopener noreferrer">{{ resposta.autor.user }}</a></p>
                 <a href="/like/r/{{ resposta.id }}" style="font-size: 10pt;">likes - {{ resposta.likes.perfil.user }} e mais {{ resposta.total }} pessoas..</a>
                 <p style="font-size:7pt;">{{ resposta.desafio.criacao }}</p>
-                <img src="/media/{{ resposta.imagem }}" alt="">
+                <img src="/media/{{ resposta.imagem }}" alt="" width="200px" style="margin: 15px">
             </div>
         {% endfor %}
     </div>
