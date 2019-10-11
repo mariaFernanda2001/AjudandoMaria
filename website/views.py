@@ -15,7 +15,6 @@ def cadastrar(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
         telefone = request.POST.get('telefone')
-        mensagem = request.POST.get('mensagem')
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')
 
@@ -35,7 +34,7 @@ def cadastrar(request):
         else:
 
             #Cadastra e acessa home
-            perfil = Perfil(avatar=avatar, user=user, sobrenome=sobrenome, mensagem=mensagem, nome=nome, email=email, telefone=telefone, senha=senha)
+            perfil = Perfil(avatar=avatar, user=user, sobrenome=sobrenome, nome=nome, email=email, telefone=telefone, senha=senha)
             perfil.save()
             
             return redirect('/home/{}'.format(perfil.id))
@@ -208,51 +207,55 @@ def desafiar(request, id):
 
     return render(request, 'desafiar.html', context)
 
-def responder(request, id, id_desafio):
+
+
+#Página de um desafio
+def desafio(request, id, id_desafio):
+    
+    desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first() #Buscar desafio
+    respostas = Resposta.objects.filter(desafio__id=id_desafio, ativo=True) #Buscar respostas do desafio
+    likes = Like.objects.filter(correspondente=id_desafio) #Buscar likes
+    ultimo = likes.first() #Ultimo perfil a dar like
 
     #Entrega formulário
     form = RespostaForm()
     
     #Para verificação de resposta idêntica
-    context = {'resposta':form}
-
     if request.method == 'POST':
-        valor = request.POST.get('valor')
+        imagem = request.FILES.get('imagem')
+        valor = request.POST.get('texto')
         autor = Perfil.objects.filter(id=id, ativo=True).first() #Buscar perfil do autor
         desafio = Desafio.objects.filter(id=id_desafio, ativo=True).first() #Buscar desafio correspondente
         filtro = Resposta.objects.filter(valor=valor, autor=autor, desafio=desafio, ativo=True).first() #Filtrar existencia de resposta idêntica
-        
-        context = {
-            'resposta':form,
-            'msg':'*Essa resposta já foi criada!!!'
-        }
 
         #Verificação de Resposta indêntica
         if filtro is None:
 
             #Criação de uma resposta no banco
-            resposta = Resposta(valor=valor, autor=autor, desafio=desafio)
+            resposta = Resposta(valor=valor, autor=autor, desafio=desafio, imagem=imagem)
             resposta.save()
-
-            return redirect('/home/{}'.format(id))
-
-    return render(request, 'responder.html', context)
-
-#Página de um desafio
-def desafio(request, id):
-    desafio = Desafio.objects.filter(id=id, ativo=True).first() #Buscar desafio
-    respostas = Resposta.objects.filter(desafio__id=id, ativo=True) #Buscar respostas do desafio
-    likes = Like.objects.filter(correspondente=id) #Buscar likes
-    ultimo = likes.first() #Ultimo perfil a dar like
+        
 
     #Entrega o contexto do desafio
-    context = {
+    if  len(likes) != 0: 
+        context = {
 
-        'desafio':desafio,
-        'respostas':respostas,
-        'likes':len(likes),
-        'like':ultimo.perfil.user
-    }
+            'desafio':desafio,
+            'respostas':respostas,
+            'likes':len(likes),
+            'like':ultimo.perfil.user,
+            'form':form
+        }
+    else:
+        context = {
+
+            'desafio':desafio,
+            'respostas':respostas,
+            'likes':len(likes),
+            'like':"sem likes",
+            'form':form
+        }
+            
 
     return render(request, 'desafio.html', context)
 

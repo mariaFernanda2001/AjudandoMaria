@@ -10,11 +10,9 @@ class  LoginForm(forms.Form):
 class UsuarioForm(LoginForm): #Herda campos de LoginForm
 
     #Formulário de cadastro
-    avatar = forms.ImageField(label='Avatar', widget=forms.widgets.ClearableFileInput)
     user = forms.CharField(label='User', required=True, max_length=15)
     nome = forms.CharField(label='Nome', required=True, max_length=15)
     sobrenome = forms.CharField(label='Sobrenome', required=True, max_length=15)
-    mensagem = forms.CharField(label='Sobre', max_length=50)
     telefone = forms.CharField(label='Telefone', widget=forms.widgets.NumberInput(), required=True, max_length=15)
 
 class DesafioForm(forms.ModelForm): #Usa uma model para criar campos
@@ -22,7 +20,6 @@ class DesafioForm(forms.ModelForm): #Usa uma model para criar campos
         model = Desafio
         fields = ('titulo', 'tema', 'valor')
 
-class RespostaForm(forms.ModelForm):
-    class Meta:
-        model = Resposta
-        fields = ('valor',)
+class RespostaForm(forms.Form):
+    imagem = forms.ImageField(label='Enviar imagem', widget=forms.widgets.ClearableFileInput)
+    texto =  forms.CharField(max_length=240, widget=forms.widgets.Textarea)

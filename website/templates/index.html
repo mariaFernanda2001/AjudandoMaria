@@ -3,6 +3,18 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/styleindex.css' %}">
+    <p style="color: red">
+        {{ msg }}
+    </p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ login }}
+        <input type="submit" value="Logar">
+    </form>
+    <a href="/cadastro/">Cadastre-se</a>
+
+    
+   
 {% endblock %}
 
 {% block content %}

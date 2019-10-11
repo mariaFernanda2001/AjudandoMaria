@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+} 
+
+/*  LABEL: LETRASZINHAS
+    FORM: NEGOCIO TODO
+    FORM INPUT: BOTOESZINHOS*/
+ 
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    background-color: #cbbcd2;
+
+}
+
+form input{
+    margin: 5px;
+    width: 300px;
+
+
+}
+label{
+    font-family: 'Oswald' , sans-serif;
+    font-size: 15px;
+}
+input{
+    margin: 5px;
+    width: 300px;
+    font-family: 'Oswald' , sans-serif;
+    font-size: 15px;
+    transform: initial;
+    transition: .9s ease-out;
+    position: relative;
+    justify-content: space-around; 
+}
+    
