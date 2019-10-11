@@ -1,0 +1,127 @@
+body{
+    display: grid;
+    grid-template-areas: 'navbar navbar navbar navbar'
+                          'header header header header'
+                         'section section section section'
+                         'footer footer footer footer';
+grid-template-columns: 25vw 25vw 25vw 25vw;
+grid-template-rows: 10vh 90vh 100vh 10vh;
+margin: 0;
+}
+
+nav{
+    grid-area: navbar;
+    display: inline;
+}
+
+header{
+    display: flex;
+    grid-area: header;
+  
+}
+
+/* Inicio Menu */
+header .menu a{
+    color:#704483;
+    text-decoration: none;
+    font-family: 'Oswald',sans-serif;
+}
+
+header .menu a:hover{
+     background-color: #e3dfe6;
+}
+
+header .menu .barra{
+    background-color:#f9f4f4;
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    transition: all .2s linear;
+    left: -200px;
+}
+
+header .menu #check{
+    display:none;
+}
+
+header .menu #check:checked ~ .barra{
+    transform: translateX(200px);
+}
+
+header .menu #icone{
+    cursor: pointer;
+    padding: 15px;
+    position: absolute;
+    z-index:1;
+}
+
+header .menu label img{
+    width: 30px;
+}
+
+header .menu .link{
+    background-color: #d5bfcb;
+    padding: 20px;
+    font-size: 12px;
+    transition: all .2s linear;
+    color:#f4f4f9;
+    border-bottom: 2px solid #f9f4f4;
+}
+
+header .menu .link:hover{
+    background-color:#9d94a1;
+
+}
+header .menu .nav-menu{
+    width: 100%;
+    position: absolute;
+    top: 60px;
+}
+
+header .menu .nav-menu a{
+    text-decoration: none;
+}
+/* Fim Menu */
+
+.banner{
+    background-image: url('../images/banner.jpg');
+    grid-area: header; 
+    height: 500px;
+    
+
+
+}
+
+.banner h3{
+    color: white;
+    margin: 50px;
+    text-align: center;
+    display: flex;
+    margin-top: 40%;
+    margin-left: 30%;
+
+}
+
+section{
+    justify-content: space-around;
+    grid-area: section;
+}
+
+section img{
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 210px;
+}
+
+section h1, h4{
+    color: #704483;
+    text-align: center;
+}
+
+section p{
+    margin: 18px;
+}
+
+footer{
+    grid-area: footer;
+}

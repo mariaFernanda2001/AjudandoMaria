@@ -1,14 +1,79 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block content %}
 
-    <p style="color: red">
-        {{ msg }}
-    </p>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ login }}
-        <input type="submit" value="Logar">
-    </form>
-    <a href="/cadastro/">Cadastre-se</a>
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/styleindex.css' %}">
 {% endblock %}
+
+{% block content %}
+<nav class="nav-base"><img src="{% static 'images/logo-redondo.jpeg'%}" alt="">
+    <p>Dare</p>
+    <p></p>
+</nav>
+
+
+    <header class="menu">
+
+  <!-- Inicio menu -->
+  <input id="check" type="checkbox">
+  <label id="icone" for="check"><img src="{% static 'images/menu.png'%}" alt=""></label>
+
+<div class="barra">
+  <nav class="nav-menu">
+      <a href="">
+          <div class="link">Desafiar</div>
+          <p style="color: red">
+            {{ msg }}
+        </p>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ login }}
+            <input type="submit" value="Logar">
+        </form>
+        <a href="/cadastro/">Cadastre-se</a>
+      </a>
+  </nav>
+</div>
+<!-- Fim menu -->
+    </header>
+
+     <header class="banner">
+         <h3>Desafie-se a fazer o bem. Entre para essa rede!</h3>
+     </header>
+    
+     <section>
+         <h1>Dare</h1>
+    
+        <p>
+            Segundo uma pesquisa realizada em 2019 pela BBC, o tempo gasto nas redes 
+            sociais aumentou 60% nos últimos 7 anos,  sendo a média global atual de 143 
+            minutos por dia  dedicados ao uso de sites ou aplicativos de mídia social. 
+        </p>
+    
+        <img src="{% static '..\static\images\dados 2012.jpg'%}" alt="Dados de 2012">
+        <img src="{% static '..\static\images\dados 2019.jpg'%}" alt="DAdos de 2019">
+        <p>
+            Usufruindo do crescente uso das redes sociais, somado ao desejo de fazer a 
+            diferença no mundo, nasce a DARE, uma rede de desafios que visam proporcionar
+            a melhora de todo nosso contexto por meio de pequenas atitudes.
+    
+        <p>    
+        <h4>Como funciona?</h4>
+           <p>
+            A DARE é movida por desafios que são sugeridos pelos usuários que comprovam a
+            a participação por meio de postagens. Os temas dos desafios são diversos e 
+            englobam educação, ecologia, socialização, saúde e bem -estar. A nossa intenção 
+            é te desafiar a fazer o bem, e você tá esperando o que para se conectar?
+       </p>
+     </section>
+
+    <footer>
+        <p><a href="https://mail.google.com/mail/u/0/?hl=pt-BR&view=cm&tf=1&fs=1&to=amanda_sj12%40hotmail.com">email</a>
+        </p>
+        <p>Desenvolvido por alunos da academia Mastertech</p>
+        <p><img src="{% static 'images/estacao-logo.png'%}" alt=""></p>
+    </footer>
+    <footer class="footer-escuro"></footer>
+    
+     
+    {% endblock %}

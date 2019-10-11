@@ -2,31 +2,24 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display|Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
-   
+
     <link rel="stylesheet" href="{% static 'css/stylebase.css' %}">
     <link rel="stylesheet" href="{% static 'css/stylehome.css' %}">
+    {% block css %}
+    {% endblock %}
     <title>Dare</title>
 </head>
+
 <body>
-<nav class="nav-base"><img src="{% static 'images/logo-redondo.jpeg'%}" alt="">
-<p>Dare</p>
-<p></p></nav>
-{% block content %}
+    {% block content %}
 
+    {% endblock %}
 
-{% endblock %}
-
-<footer>
-    <p><a href="https://mail.google.com/mail/u/0/?hl=pt-BR&view=cm&tf=1&fs=1&to=amanda_sj12%40hotmail.com">email</a></p>
-    <p>Desenvolvido por alunos da academia Mastertech</p>
-    <p><img src="{% static 'images/estacao-logo.png'%}" alt=""></p>
-</footer>
-<footer class="footer-escuro"></footer>
 </body>
-</html>
