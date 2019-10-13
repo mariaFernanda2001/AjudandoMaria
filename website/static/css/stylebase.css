@@ -39,32 +39,7 @@ section{
     grid-area: section;
 }
 
-footer{ 
-    align-items: center; 
-    background-color: #cbbcd2;
-    display: flex;
-    grid-area: footer;
-    justify-content: space-between;  
-    }
-    
 
-footer img{
-    margin-right: 5px;
-    margin-top: 3px;
-    width: 30px;
-}
-
-footer p{
-    color: #979797;
-    font-family: 'Montserrat';
-    margin-left: 5px;
-}
-
-footer p a{
-    
-    color: #979797;
-    text-decoration: none;
-}
 .nav-base { align-items: center;
     background-color: #6f4584;
     display: flex;

@@ -3,16 +3,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/styleindex.css' %}">
-    <p style="color: red">
-        {{ msg }}
-    </p>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ login }}
-        <input type="submit" value="Logar">
-    </form>
-    <a href="/cadastro/">Cadastre-se</a>
-
+ 
     
    
 {% endblock %}
@@ -32,18 +23,16 @@
 
 <div class="barra">
   <nav class="nav-menu">
-      <a href="">
-          <div class="link">Desafiar</div>
-          <p style="color: red">
-            {{ msg }}
-        </p>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ login }}
-            <input type="submit" value="Logar">
-        </form>
-        <a href="/cadastro/">Cadastre-se</a>
-      </a>
+    <p style="color: red">
+        {{ msg }}
+    </p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ login }}
+        <input type="submit" value="Logar">
+    </form>
+    <a href="/cadastro/">Cadastre-se</a>
+
   </nav>
 </div>
 <!-- Fim menu -->
@@ -85,7 +74,7 @@
         <p>Desenvolvido por alunos da academia Mastertech</p>
         <p><img src="{% static 'images/estacao-logo.png'%}" alt=""></p>
     </footer>
-    <footer class="footer-escuro"></footer>
+    
     
      
     {% endblock %}

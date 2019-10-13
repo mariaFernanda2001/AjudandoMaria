@@ -5,7 +5,7 @@ body{
                          'section section section section'
                          'footer footer footer footer';
 grid-template-columns: 25vw 25vw 25vw 25vw;
-grid-template-rows: 10vh 90vh 100vh 10vh;
+grid-template-rows: 10vh 90vh 200vh 10vh;
 margin: 0;
 }
 
@@ -48,7 +48,7 @@ header .menu #check:checked ~ .barra{
     transform: translateX(200px);
 }
 
-header .menu #icone{
+header .menu-index #icone{
     cursor: pointer;
     padding: 15px;
     position: absolute;
@@ -59,6 +59,10 @@ header .menu label img{
     width: 30px;
 }
 
+header .menu label label{
+    font-family: 'Oswald' , sans-serif;
+    font-size: 15px;
+}
 header .menu .link{
     background-color: #d5bfcb;
     padding: 20px;
@@ -78,17 +82,18 @@ header .menu .nav-menu{
     top: 60px;
 }
 
-header .menu .nav-menu a{
-    text-decoration: none;
+header .menu .nav-menu input{
+    width: auto;
 }
+
 /* Fim Menu */
 
 .banner{
     background-image: url('../images/banner.jpg');
     grid-area: header; 
     height: 500px;
+    background-repeat: no-repeat;
     
-
 
 }
 
@@ -101,7 +106,9 @@ header .menu .nav-menu a{
     margin-left: 30%;
 
 }
-
+form input{
+    margin: 5px;
+    width: 150px}
 section{
     justify-content: space-around;
     grid-area: section;
@@ -111,6 +118,8 @@ section img{
     align-items: center;
     margin-top: 10px;
     margin-left: 210px;
+    width: 150px;
+    margin-left: 30%;
 }
 
 section h1, h4{
@@ -122,6 +131,29 @@ section p{
     margin: 18px;
 }
 
-footer{
+ footer{ 
+    align-items: center; 
+    background-color: #cbbcd2;
+    display: flex;
     grid-area: footer;
+    justify-content: space-between;  
+    }
+    
+
+footer img{
+    margin-right: 5px;
+    margin-top: 3px;
+    width: 30px;
+}
+
+footer p{
+    color: #979797;
+    font-family: 'Montserrat';
+    margin-left: 5px;
+}
+
+footer p a{
+    
+    color: #979797;
+    text-decoration: none;
 }
